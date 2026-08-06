@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 
-import {Test} from "forge-std/Test.sol";
+import {Test, console} from "forge-std/Test.sol";
 import {Kasa} from "../src/Kasa.sol";
 import {KasaGuvenli} from "../src/KasaGuvenli.sol";
 
@@ -33,6 +33,8 @@ contract SoygunTest is Test {
 
         // Three honest users each park 5 ether in the vault.
         for (uint256 i = 1; i <= 3; i++) {
+            // casting to 'uint160' is safe because the loop bound is 3
+            // forge-lint: disable-next-line(unsafe-typecast)
             address user = address(uint160(1000 + i));
             vm.deal(user, 5 ether);
             vm.prank(user);
@@ -41,7 +43,15 @@ contract SoygunTest is Test {
         assertEq(kasa.totalBalance(), 15 ether);
 
         Saldirgan saldirgan = new Saldirgan{value: 1 ether}(kasa);
+
+        // Run with -vv so the class can read these numbers off the screen.
+        console.log("BEFORE  vault (ether)   :", kasa.totalBalance() / 1 ether);
+        console.log("BEFORE  attacker (ether):", address(saldirgan).balance / 1 ether);
+
         saldirgan.attack();
+
+        console.log("AFTER   vault (ether)   :", kasa.totalBalance() / 1 ether);
+        console.log("AFTER   attacker (ether):", address(saldirgan).balance / 1 ether);
 
         // The vault is empty and the attacker walked away with everyone's money.
         assertEq(kasa.totalBalance(), 0);
@@ -55,6 +65,18 @@ contract SoygunTest is Test {
         vm.deal(user, 5 ether);
         vm.prank(user);
         kasa.deposit{value: 5 ether}();
+
+        Saldirgan saldirgan = new Saldirgan{value: 1 ether}(Kasa(address(kasa)));
+
+        console.log("BEFORE  vault (ether)   :", kasa.totalBalance() / 1 ether);
+
+        // The same attacker contract, pointed at the patched vault. Its receive()
+        // hook still fires, but the balance is already zero when it re-enters.
+        vm.expectRevert();
+        saldirgan.attack();
+
+        console.log("AFTER   vault (ether)   :", kasa.totalBalance() / 1 ether);
+        console.log("AFTER   attacker (ether):", address(saldirgan).balance / 1 ether);
 
         vm.prank(user);
         kasa.withdraw();
