@@ -1,0 +1,114 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import {
+  BaseError,
+  useAccount,
+  useConnect,
+  useReadContract,
+  useWaitForTransactionReceipt,
+  useWriteContract,
+} from "wagmi";
+import { DEFTER_ABI, DEFTER_ADDRESS } from "./config";
+
+export default function Home() {
+  const { address, isConnected } = useAccount();
+  const { connect, connectors } = useConnect();
+  const [draft, setDraft] = useState("");
+
+  // Day 4 / session 1: reading from the chain.
+  const { data: lastMessage, refetch: refetchMessage } = useReadContract({
+    address: DEFTER_ADDRESS,
+    abi: DEFTER_ABI,
+    functionName: "lastMessage",
+  });
+
+  const { data: messageCount, refetch: refetchCount } = useReadContract({
+    address: DEFTER_ADDRESS,
+    abi: DEFTER_ABI,
+    functionName: "messageCount",
+  });
+
+  // Day 4 / session 2, step 2: the write itself.
+  // `hash` is the transaction hash, available as soon as the wallet signs.
+  const { data: hash, writeContract, isPending, error } = useWriteContract();
+
+  // Step 3 + 5: a signed transaction is not a confirmed one. Wait for the receipt.
+  const { isLoading: isConfirming, isSuccess: isConfirmed } =
+    useWaitForTransactionReceipt({ hash });
+
+  // Step 5: once the chain confirms, re-read the board so the page updates itself.
+  useEffect(() => {
+    if (!isConfirmed) return;
+    refetchMessage();
+    refetchCount();
+    setDraft("");
+  }, [isConfirmed, refetchMessage, refetchCount]);
+
+  const isBusy = isPending || isConfirming;
+
+  function send() {
+    writeContract({
+      address: DEFTER_ADDRESS,
+      abi: DEFTER_ABI,
+      functionName: "write",
+      args: [draft],
+    });
+  }
+
+  return (
+    <main>
+      <h1>Şirince Defteri</h1>
+      <p className="sub">Zincir üzerindeki köy defteri</p>
+
+      <div className="card">
+        <div className="label">Son mesaj</div>
+        <div className="value">{lastMessage ?? "—"}</div>
+      </div>
+
+      <div className="card">
+        <div className="label">Toplam mesaj</div>
+        <div className="value">{messageCount?.toString() ?? "—"}</div>
+      </div>
+
+      <div className="card">
+        {isConnected ? (
+          <>
+            <div className="label">Bağlı cüzdan</div>
+            <span className="addr">{address}</span>
+          </>
+        ) : (
+          <button onClick={() => connect({ connector: connectors[0] })}>
+            Cüzdanı bağla
+          </button>
+        )}
+      </div>
+
+      <div className="card">
+        <div className="label">Mesaj yaz</div>
+        <input
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          placeholder="Deftere ne yazmak istersin?"
+          disabled={isBusy}
+        />
+        <button onClick={send} disabled={!isConnected || isBusy || draft.length === 0}>
+          {isPending
+            ? "Cüzdan onayı bekleniyor..."
+            : isConfirming
+              ? "Zincire yazılıyor..."
+              : "Gönder"}
+        </button>
+
+        {/* Step 4: the user can reject, run out of gas, or lose the network. */}
+        {error && (
+          <p className="err">
+            {error instanceof BaseError ? error.shortMessage : error.message}
+          </p>
+        )}
+
+        {isConfirmed && <p className="ok">Yazıldı. Defter güncellendi.</p>}
+      </div>
+    </main>
+  );
+}

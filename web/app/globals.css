@@ -12,12 +12,100 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The page body between the navbar and the footer. */
+.page {
+  flex: 1;
   display: flex;
   justify-content: center;
-  padding: 4rem 1.5rem;
+  padding: 3rem 1.5rem;
 }
 
 main { width: 100%; max-width: 34rem; }
+
+/* ---------- navbar ---------- */
+
+.nav {
+  background: #fff;
+  border-bottom: 1px solid var(--tint);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-inner {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.brand-mark { color: var(--purple); font-size: 1.2rem; }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.4rem 0.7rem;
+  border-radius: 0.5rem;
+}
+
+.nav-links a:hover {
+  color: var(--purple);
+  background: var(--tint);
+}
+
+/* ---------- footer ---------- */
+
+.footer {
+  background: #fff;
+  border-top: 1px solid var(--tint);
+  margin-top: 2rem;
+}
+
+.footer-inner {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.footer-warn { color: #b00020; }
+
+.footer a { color: var(--purple); font-weight: 600; text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
 
 h1 { font-size: 2rem; margin-bottom: 0.5rem; }
 
@@ -74,3 +162,5 @@ input {
 }
 
 .err { color: #b00020; font-size: 0.85rem; margin-top: 0.75rem; }
+
+.ok { color: #0a7d38; font-size: 0.85rem; margin-top: 0.75rem; }

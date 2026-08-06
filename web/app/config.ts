@@ -1,6 +1,9 @@
-import { http, createConfig } from "wagmi";
+// `injected` is imported from "wagmi" rather than "wagmi/connectors" on purpose:
+// the connectors barrel pulls in optional peer dependencies (WalletConnect,
+// Coinbase, Tempo) that this project does not install, and the bundler fails on
+// them. The injected connector lives in @wagmi/core, so this import is enough.
+import { http, createConfig, injected } from "wagmi";
 import { baseSepolia } from "wagmi/chains";
-import { injected } from "wagmi/connectors";
 
 // STUDENTS: replace this with your own deployed contract address.
 export const DEFTER_ADDRESS = "0x0000000000000000000000000000000000000000" as const;
