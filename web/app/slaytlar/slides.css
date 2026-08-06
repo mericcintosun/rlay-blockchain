@@ -1,0 +1,403 @@
+/* RBW 2026 deck styling. Palette and type scale come from the brand guide:
+   flat colours, 12px radius, no shadows, no gradients, no 3D. */
+
+:root {
+  --deck-purple: #5a0fbe;
+  --deck-purple-dark: #3d0a85;
+  --deck-purple-light: #ede3fa;
+  --deck-paper: #f7f8fa;
+  --deck-ink: #0a0a0a;
+  --deck-grey: #5b5b66;
+  --deck-lilac: #c9a9f5;
+  --deck-lilac-pale: #e4d5fb;
+}
+
+/* Hide the site chrome while a deck is on screen. */
+.slides-mode .nav,
+.slides-mode .footer {
+  display: none;
+}
+
+.slides-mode .page {
+  padding: 0;
+}
+
+.slides-mode main {
+  max-width: none;
+}
+
+.deck {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--deck-ink);
+  font-family: Poppins, Sora, system-ui, -apple-system, sans-serif;
+}
+
+/* ---------- chrome ---------- */
+
+.deck-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+  color: #fff;
+  font-size: 0.8rem;
+  background: var(--deck-ink);
+}
+
+.deck-name { font-weight: 700; }
+.deck-when { color: var(--deck-lilac); }
+.deck-count { margin-left: auto; font-variant-numeric: tabular-nums; opacity: 0.7; }
+
+.deck-stage {
+  flex: 1;
+  display: flex;
+  padding: 0 1.25rem;
+}
+
+.deck-note {
+  margin: 0 1.25rem 0.75rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: var(--deck-lilac-pale);
+  color: var(--deck-ink);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.deck-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.25rem 1.25rem;
+}
+
+.deck-hint {
+  flex: 1;
+  text-align: center;
+  color: var(--deck-lilac);
+  font-size: 0.8rem;
+}
+
+.deck-btn {
+  width: auto;
+  background: #fff;
+  color: var(--deck-ink);
+  border: 0;
+  border-radius: 12px;
+  padding: 0.7rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.deck-btn.primary { background: var(--deck-purple); color: #fff; }
+.deck-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* ---------- slide frame ---------- */
+
+.slide {
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  border-radius: 12px;
+  background: var(--deck-paper);
+  color: var(--deck-ink);
+  padding: 3.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.75rem;
+}
+
+.slide-title {
+  font-size: clamp(1.5rem, 3vw, 2.125rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Decorative circles from the brand guide. */
+.dot {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.dot-tl {
+  width: 18rem; height: 18rem;
+  top: -9rem; left: -9rem;
+  background: var(--deck-purple-dark);
+}
+
+.dot-br {
+  width: 22rem; height: 22rem;
+  bottom: -11rem; right: -11rem;
+  background: var(--deck-purple-dark);
+}
+
+.dot-soft {
+  width: 16rem; height: 16rem;
+  bottom: -8rem; right: -6rem;
+  background: var(--deck-purple-light);
+}
+
+/* ---------- kapak ---------- */
+
+.kapak {
+  background: var(--deck-purple);
+  color: #fff;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.kapak.dark { background: var(--deck-ink); }
+.kapak.dark .dot-tl,
+.kapak.dark .dot-br { background: var(--deck-purple); }
+
+.kapak-label {
+  position: relative; z-index: 1;
+  color: var(--deck-lilac);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.kapak-title {
+  position: relative; z-index: 1;
+  font-size: clamp(2rem, 4.6vw, 2.875rem);
+  font-weight: 700;
+  line-height: 1.15;
+  max-width: 22ch;
+}
+
+.kapak-sub {
+  position: relative; z-index: 1;
+  color: var(--deck-lilac-pale);
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  max-width: 46ch;
+}
+
+/* ---------- cumle ---------- */
+
+.cumle { background: var(--deck-purple); color: #fff; }
+
+.cumle-text {
+  position: relative; z-index: 1;
+  font-size: clamp(1.5rem, 3.2vw, 2.125rem);
+  font-weight: 700;
+  line-height: 1.3;
+  max-width: 24ch;
+}
+
+/* ---------- govde ---------- */
+
+.govde-body {
+  position: relative; z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 62ch;
+}
+
+.govde-body p {
+  color: var(--deck-grey);
+  font-size: clamp(0.95rem, 1.5vw, 1.0625rem);
+  line-height: 1.65;
+}
+
+/* ---------- kart ---------- */
+
+.kart-grid {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.kart {
+  background: var(--deck-purple-light);
+  border-radius: 12px;
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.kart-num {
+  width: 2.1rem; height: 2.1rem;
+  border-radius: 50%;
+  background: var(--deck-purple);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.kart-title { font-size: 1.1rem; font-weight: 700; }
+.kart-text { color: var(--deck-grey); font-size: 0.875rem; line-height: 1.55; }
+
+/* ---------- iki sutun ---------- */
+
+.sutun-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.sutun { border-radius: 12px; padding: 2rem; }
+.sutun.light { background: var(--deck-purple-light); color: var(--deck-ink); }
+.sutun.solid { background: var(--deck-purple); color: #fff; }
+
+.sutun h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; }
+.sutun ul { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+.sutun li { font-size: 0.95rem; line-height: 1.5; padding-left: 1rem; position: relative; }
+.sutun li::before { content: "•"; position: absolute; left: 0; }
+.sutun.light li { color: var(--deck-grey); }
+
+/* ---------- adimlar ---------- */
+
+.adim-row {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 0.85rem;
+}
+
+.adim {
+  border-radius: 12px;
+  padding: 1.5rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.adim.solid { background: var(--deck-purple); color: #fff; }
+.adim.light { background: var(--deck-purple-light); color: var(--deck-ink); }
+
+.adim-num { font-size: 1.6rem; font-weight: 700; opacity: 0.6; }
+.adim-text { font-size: 0.9rem; font-weight: 600; line-height: 1.4; }
+
+/* ---------- liste ---------- */
+
+.liste {
+  position: relative; z-index: 1;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 64ch;
+}
+
+.liste li { display: flex; align-items: flex-start; gap: 1rem; font-size: 1.0625rem; line-height: 1.5; }
+
+.liste-num {
+  flex: none;
+  width: 2rem; height: 2rem;
+  border-radius: 50%;
+  background: var(--deck-purple);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* ---------- rakam ---------- */
+
+.rakam { align-items: center; text-align: center; }
+
+.rakam-value {
+  position: relative; z-index: 1;
+  font-size: clamp(4rem, 11vw, 5.5rem);
+  font-weight: 700;
+  color: var(--deck-purple);
+  line-height: 1;
+}
+
+.rakam-text {
+  position: relative; z-index: 1;
+  color: var(--deck-grey);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  max-width: 56ch;
+}
+
+/* ---------- kod ---------- */
+
+.kod-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 1.5rem; align-items: start; }
+
+.kod-block {
+  background: var(--deck-ink);
+  color: #ede3fa;
+  border-radius: 12px;
+  padding: 1.5rem;
+  overflow-x: auto;
+  font-family: "JetBrains Mono", "Courier New", monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.kod-notes { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+
+.kod-notes li {
+  color: var(--deck-grey);
+  font-size: 0.95rem;
+  font-family: "JetBrains Mono", "Courier New", monospace;
+  padding-left: 1rem;
+  border-left: 3px solid var(--deck-purple-light);
+}
+
+/* ---------- passcode gate ---------- */
+
+.gate {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.86);
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  z-index: 50;
+}
+
+.gate-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  width: min(24rem, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.gate-title { font-size: 1.2rem; font-weight: 700; }
+.gate-sub { color: var(--deck-grey); font-size: 0.875rem; line-height: 1.5; }
+
+.gate-input {
+  width: 100%;
+  text-align: center;
+  letter-spacing: 0.6em;
+  font-size: 1.6rem;
+  font-weight: 700;
+  padding: 0.75rem;
+  border: 1px solid var(--deck-purple-light);
+  border-radius: 12px;
+  margin: 0;
+}
+
+.gate-err { color: #b00020; font-size: 0.85rem; }
+.gate-actions { display: flex; gap: 0.6rem; justify-content: flex-end; }
+
+/* ---------- small screens ---------- */
+
+@media (max-width: 900px) {
+  .slide { padding: 2rem 1.5rem; gap: 1.25rem; }
+  .kart-grid,
+  .sutun-grid,
+  .kod-grid { grid-template-columns: 1fr; }
+  .adim-row { grid-auto-flow: row; }
+  .deck-hint { display: none; }
+}
