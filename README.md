@@ -35,6 +35,7 @@ Gün 1'de repo'ya ihtiyacın yok — sadece tarayıcı yeterli.
 | Node.js | ≥ 20.9 (test edilen: 24.15.0) |
 | Next.js | 16.3.0 |
 | wagmi / viem | 3.7.6 / 2.55.11 |
+| TypeScript | 7.0.2 |
 
 Solidity ve Foundry sürümleri `contracts/foundry.lock` ile çivili.
 Web sürümleri `web/package.json` içinde tam sürüm olarak sabit — caret yok, kamp
