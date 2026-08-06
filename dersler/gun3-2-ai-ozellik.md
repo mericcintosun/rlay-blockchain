@@ -32,7 +32,16 @@ istiyorsun, implementasyon istemiyorsun, yukarıdaki dört kural.
 Eksik test varsa sen ekle. **Dur ve bekle.**
 
 ### Adım 3 — Testleri çalıştır (kırmızı olmalı)
-`forge test` → hepsi kırmızı, çünkü henüz kod yok.
+`forge test` çalıştır.
+
+> **Muhtemelen "kırmızı test" değil, derleme hatası göreceksin** — testler henüz
+> var olmayan bir fonksiyonu (`setDailyLimit` gibi) çağırıyor, o yüzden proje
+> derlenmiyor bile. Bu bir aksaklık değil, aynı dersin daha sert hali:
+> "Testi yazdık, kod o kadar yok ki derlenmiyor bile."
+>
+> Gerçekten kırmızı test görmek istersen, önce fonksiyonların boş gövdelerini
+> ekletip (`revert()` yeter) sonra çalıştır. İki dakika sürer, sahne daha temiz olur.
+
 "Kırmızı iyi bir şey. Doğrunun tanımı hazır, uygulama yok."
 **Dur ve bekle.**
 

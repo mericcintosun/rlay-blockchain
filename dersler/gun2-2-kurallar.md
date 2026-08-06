@@ -46,6 +46,11 @@ Aynı kontrolü ikinci bir fonksiyona yazman gerekseydi kopyalar mıydın?
 Öğrencinin kontratı artık `contracts/src/SirinceDefteri.sol` ile aynı olmalı.
 Karşılaştırt. Farklıysa nedenini konuş.
 
+**Bir fark bilerek kalacak:** referans dosyada `address public immutable owner;`
+yazıyor, öğrencide sadece `address public owner;`. Soran olursa tek cümle:
+"`immutable` = bir kere yazılır, bir daha değişmez. Sahip zaten değişmeyecekse
+bunu koda söylemek hem daha ucuz hem daha güvenli." Fazlasına girme.
+
 ## Sık gelen soru
 
 "Sahibi değiştirebilir miyiz?" — Evet, ama o zaman sahipliği devreden bir fonksiyon

@@ -17,6 +17,11 @@ Okuma bedava ve anlık. Yazma ücretli ve beklemeli.
 `useWriteContract` ile input + butonu kontrata bağla.
 Adım adım yaz, tek seferde dökme. **Dur ve bekle.**
 
+> **Eğitmen yedeği:** bu dersin sonunda ortaya çıkması gereken tam dosya
+> `web/app/COZUM_gun4.tsx.txt` içinde duruyor (derlendiği doğrulandı).
+> Sınıfta açma — takılırsan veya süre biterse bak. Bu ders bittiğinde
+> `page.tsx`'in içeriği o dosyayla aynı olmalı.
+
 ### Adım 3 — Bekleme durumu
 Butona bas, cüzdan açılıyor, onayla. Şimdi bekliyor.
 "Kullanıcı burada ne görüyor? Hiçbir şey. Bu kötü bir deneyim."

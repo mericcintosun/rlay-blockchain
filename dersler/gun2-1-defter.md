@@ -16,13 +16,18 @@ Hepsi bir sonraki derste gelecek. Şimdi girersen kaybediyorsun.
 ## Adımlar
 
 ### Adım 1 — Boş kontrat
-Remix'te yeni dosya. Sadece şunu yaz:
+Remix'te Environment'ı **"Remix VM"** yap (henüz gerçek ağa çıkmıyoruz).
+Yeni dosya aç, sadece şunu yaz:
 
 ```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.28;
+
 contract SirinceDefteri {
 }
 ```
 
+İlk iki satırı şimdilik "kimlik bilgisi" diye geç — lisans ve derleyici sürümü.
 Derle. "Hiçbir şey yapmıyor ama artık bir kontratımız var" de.
 **Dur ve bekle.**
 

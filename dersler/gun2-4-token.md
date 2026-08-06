@@ -10,7 +10,13 @@ Standart neden var, denetlenmiş kütüphane neden kullanılır — ve sınıf e
 ## Adımlar
 
 ### Adım 1 — Repo'yu klonlat
-`git clone` + `cd contracts` + `forge install`.
+```bash
+git clone --recurse-submodules <repo-url>
+cd sirince-onchain/contracts
+forge build
+```
+`--recurse-submodules` unutulduysa: `forge install` aynı kapıya çıkar.
+
 Kurulum sorunlarına 10 dakikadan fazla verme; takılan öğrenci yanındakiyle eşleşsin.
 **Dur ve bekle.**
 
@@ -20,7 +26,7 @@ Kurulum sorunlarına 10 dakikadan fazla verme; takılan öğrenci yanındakiyle 
 - `maxSupply` neden `immutable`
 - `mint` neden `onlyOwner`
 
-"Bu dosya 25 satır. Sıfırdan yazsaydık 150 satır olurdu ve içinde bug olurdu.
+"Bu dosya 30 satır. Sıfırdan yazsaydık 150 satır olurdu ve içinde bug olurdu.
 Yarın tam olarak bunun örneğini göreceğiz." **Dur ve bekle.**
 
 ### Adım 3 — Testleri çalıştır
@@ -30,8 +36,24 @@ Kırmızıyı göster. Geri al.
 "Test, kuralının hâlâ orada olduğunu kanıtlıyor." **Dur ve bekle.**
 
 ### Adım 4 — Kendi token'ını çıkar
-Öğrenciler sadece üç parametreyi değiştirsin: isim, sembol, toplam arz.
-Deploy et. **Dur ve bekle.**
+`script/Deploy.s.sol` içinde sadece üç parametreyi değiştirsinler:
+isim, sembol, toplam arz.
+
+Deploy **terminalden** — bu ders Remix'te değil:
+```bash
+cp ../.env.example .env      # PRIVATE_KEY satırını kendi TEST cüzdanınla doldur
+source .env
+forge script script/Deploy.s.sol --rpc-url base_sepolia --broadcast --private-key $PRIVATE_KEY
+```
+
+Önce `--broadcast` olmadan çalıştırtabilirsin: simülasyon yapar, tahmini ücreti
+yazar (~0.000015 ETH), hiçbir şey harcamaz. Güzel bir ara adım.
+
+> **`SirinceToken.sol`'u Remix'e yapıştırmayın.** İçindeki
+> `openzeppelin-contracts/...` satırı bir Foundry remapping'i; Remix onu çözemez
+> ya da yanlış bir paket çeker. Bu dosya terminalde derlenir.
+
+**Dur ve bekle.**
 
 ### Adım 5 — Ekonomiyi aç
 Sen kamp token'ını deploy et ve herkese 100 tane dağıt.

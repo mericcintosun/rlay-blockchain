@@ -8,14 +8,37 @@ Nesin Matematik Köyü · Şirince · 10–15 Ağustos 2026
 ## Kurulum (3 komut)
 
 ```bash
-git clone <repo-url> && cd sirince-onchain
-cd contracts && forge install
-cp ../.env.example ../.env
+git clone --recurse-submodules <repo-url> && cd sirince-onchain
+cd contracts && forge build
+cp ../.env.example .env
 ```
 
-Bu kadar. `forge build` çalışıyorsa hazırsın.
+Bu kadar. `forge test` yeşilse hazırsın.
+
+`--recurse-submodules` yazmayı unuttuysan: `forge install` çalıştır, aynı kapıya çıkar.
+
+> **`.env` nerede duracak:** `contracts/` klasörünün içinde, `foundry.toml`'un yanında.
+> Repo kökünde durursa Foundry onu **görmez** ve deploy günü `RPC_URL` bulunamaz.
 
 Gün 1'de repo'ya ihtiyacın yok — sadece tarayıcı yeterli.
+
+---
+
+## Sürümler (6 Ağustos 2026'da doğrulandı)
+
+| Araç | Sürüm |
+|---|---|
+| Foundry (`forge`) | 1.7.1 |
+| Solidity | 0.8.28 |
+| forge-std | v1.9.7 |
+| OpenZeppelin Contracts | v5.7.0 |
+| Node.js | ≥ 20.9 (test edilen: 24.15.0) |
+| Next.js | 16.3.0 |
+| wagmi / viem | 3.7.6 / 2.55.11 |
+
+Solidity ve Foundry sürümleri `contracts/foundry.lock` ile çivili.
+Web sürümleri `web/package.json` içinde tam sürüm olarak sabit — caret yok, kamp
+sırasında kendiliğinden güncellenmez.
 
 ---
 
@@ -66,5 +89,5 @@ Gün 1 ve Gün 3'ün ilk oturumu slaytla anlatılır, ders dosyası yok.
 
 ## Ağ
 
-Base Sepolia testnet. Asla mainnet değil.
-Özel anahtarın sadece `.env` içinde durur. `.env` dosyasını **asla** commit etme.
+Base Sepolia testnet (chain id **84532**). Asla mainnet değil.
+Özel anahtarın sadece `contracts/.env` içinde durur. `.env` dosyasını **asla** commit etme.

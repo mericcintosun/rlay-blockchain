@@ -24,12 +24,21 @@ Deploy'a bas. Cüzdan onay isteyecek. Ücreti göster — kaç kuruş olduğunu 
 İşlem onaylanana kadar bekleyin, birlikte sayın. **Dur ve bekle.**
 
 ### Adım 3 — Explorer
-Kontrat adresini kopyala, explorer'da aç.
+Kontrat adresini kopyala, **https://sepolia.basescan.org** adresinde aç.
 "Bu adres artık senin. Kimse silemez."
 Herkes adresini tahtaya yazsın. **Dur ve bekle.**
 
 ### Adım 4 — Kaynak kodu doğrula
 Explorer'da Verify & Publish. Kodu yapıştır, doğrula.
+
+> **Doğrulamanın en sık patladığı yer burası.** Üç şey Remix'teki ayarla
+> **birebir** aynı olmalı, yoksa "bytecode does not match" alırsın:
+> 1. Derleyici sürümü (Remix'in Solidity Compiler sekmesinde yazan tam sürüm)
+> 2. Optimizer açık mı kapalı mı (Remix'te varsayılan **kapalı**)
+> 3. Lisans satırı (`MIT`)
+>
+> Sınıfa girmeden önce kendi kontratınla bir kere dene. Bu adım yarım saat yiyebilir.
+
 "Şimdi herkes kodunu okuyabiliyor. Doğrulanmamış kontrat = okunamayan sözleşme."
 **Dur ve bekle.**
 

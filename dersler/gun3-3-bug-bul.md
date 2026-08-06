@@ -23,7 +23,12 @@ Takımlar 3 kişilik. Bulan takıma token ödülü.
 ## Adımlar
 
 ### Adım 1 — Mevcut testleri çalıştır (5 dk)
-`forge test --match-path egzersiz/BuggyToken.t.sol` → yeşil.
+Egzersiz **ayrı bir Foundry projesi** (ana `forge test` çıktısında görünmesin diye):
+```bash
+cd contracts/egzersiz
+forge test
+```
+İki test de yeşil.
 "İşte tuzak burada. Yeşil, kod doğru demek değil."
 **Dur ve bekle.**
 

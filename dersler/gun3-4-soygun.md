@@ -11,17 +11,26 @@ Kampın en akılda kalan 45 dakikası. Önce saldırı, sonra savunma.
 Slaydı aç, tek cümle söyle: "Şimdi bir kasa açacağım ve gözünüzün önünde
 boşaltacağım." Sonra konuşmayı kes.
 
-`contracts/src/Kasa.sol` dosyasını aç, birlikte oku. 20 satır.
+`contracts/src/Kasa.sol` dosyasını aç, birlikte oku. 30 satır, üç fonksiyon.
 Sınıfa sor: "Burada bir sorun görüyor musunuz?" Genelde göremezler. İyi.
 **Dur ve bekle.**
 
 ## Adım 2 — Soygunu çalıştır (10 dk)
+`contracts/` klasöründen:
 ```
 forge test --match-test test_VulnerableVaultCanBeDrained -vv
 ```
 
+Ekranda şunu göreceksin — tahtaya aynen bu tabloyu yaz:
+```
+BEFORE  vault (ether)   : 15
+BEFORE  attacker (ether): 1
+AFTER   vault (ether)   : 0
+AFTER   attacker (ether): 16
+```
+
 Üç dürüst kullanıcı 15 ether yatırmıştı. Saldırgan 1 ether ile geldi, 16 ether ile çıktı.
-Sayıları tahtaya yaz. **Dur ve bekle.**
+**Dur ve bekle.**
 
 ## Adım 3 — Ne oldu? (10 dk)
 `Soygun.t.sol` içindeki `Saldirgan` kontratını aç. `receive()` fonksiyonunu göster.
@@ -43,6 +52,14 @@ Cevap gelince `KasaGuvenli.sol`'u aç ve karşılaştır. Tek fark: sıra.
 
 ```
 forge test --match-test test_PatchedVaultResistsTheSameAttack -vv
+```
+
+Bu test **aynı `Saldirgan` kontratını** yamalı kasaya sürüyor. Saldırı bu sefer
+revert ediyor: saldırgan 1 ether ile geldi, 1 ether ile gidiyor, kasaya dokunamıyor.
+```
+BEFORE  vault (ether)   : 5
+AFTER   vault (ether)   : 5
+AFTER   attacker (ether): 1
 ```
 
 Tahtaya yaz ve sildirme:
