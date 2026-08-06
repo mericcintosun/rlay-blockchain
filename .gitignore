@@ -3,7 +3,8 @@ node_modules/
 contracts/out/
 contracts/cache/
 contracts/broadcast/
-contracts/lib/
+contracts/egzersiz/out/
+contracts/egzersiz/cache/
 web/.next/
 web/node_modules/
 .DS_Store

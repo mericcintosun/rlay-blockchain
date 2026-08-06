@@ -1,0 +1,14 @@
+# Standalone Foundry project for the Day 3 exercise.
+#
+# It lives outside the main build target on purpose: running `forge test` in
+# contracts/ must NOT reveal that a BuggyToken exists before Day 3.
+# Dependencies are shared with the parent project - nothing extra to install.
+#
+# Usage:  cd contracts/egzersiz && forge test
+
+[profile.default]
+src = "."
+test = "."
+libs = ["../lib"]
+optimizer = true
+optimizer_runs = 200
