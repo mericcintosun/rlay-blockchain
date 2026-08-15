@@ -11,11 +11,24 @@
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
+
+/* RlayHub lockup. Single colour - it follows `color`, so the same markup works
+   on a white navbar and on a purple slide. Sized in `em` off its own font-size. */
+.rlayhub {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  line-height: 1;
+  color: inherit;
+}
+
+.rlayhub-mark { width: 1.05em; height: 1.05em; flex: none; }
+.rlayhub-word { font-weight: 700; letter-spacing: -0.015em; font-size: 1em; }
 
 /* The page body between the navbar and the footer. */
 .page {
@@ -51,14 +64,10 @@ main { width: 100%; max-width: 34rem; }
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: var(--ink);
+  font-size: 1.15rem;
+  color: var(--purple);
   text-decoration: none;
 }
-
-.brand-mark { color: var(--purple); font-size: 1.2rem; }
 
 .nav-links {
   display: flex;

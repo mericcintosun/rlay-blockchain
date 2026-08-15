@@ -1,5 +1,23 @@
+import { JetBrains_Mono, Poppins } from "next/font/google";
 import { Providers } from "./providers";
+import { RlayHubLogo } from "./RlayHubLogo";
 import "./globals.css";
+
+// Brand guide: geometric sans for everything, monospace for code.
+// latin-ext carries the Turkish characters (ş ğ ı İ ç ö ü).
+const poppins = Poppins({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "700"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 export const metadata = {
   title: "Şirince On-Chain",
@@ -18,14 +36,13 @@ const NAV_LINKS = [
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="tr">
+    <html lang="tr" className={`${poppins.variable} ${mono.variable}`}>
       <body>
         <Providers>
           <header className="nav">
             <div className="nav-inner">
               <a className="brand" href="/">
-                <span className="brand-mark">◈</span>
-                <span>Şirince On-Chain</span>
+                <RlayHubLogo />
               </a>
               <nav className="nav-links">
                 {NAV_LINKS.map((link) => (

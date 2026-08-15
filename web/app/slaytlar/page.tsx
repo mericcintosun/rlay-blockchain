@@ -1,7 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { ALL_SLIDES, type Slide } from "./slides";
+import { RlayHubLogo } from "../RlayHubLogo";
+import { SlideView } from "./SlideView";
+import { ALL_SLIDES } from "./slides";
 import "./slides.css";
 
 const TOTAL = ALL_SLIDES.length;
@@ -46,9 +48,7 @@ export default function Slaytlar() {
     setIndex((i) => Math.min(i + 1, TOTAL - 1));
   }, [unlocked]);
 
-  const prev = useCallback(() => {
-    setIndex((i) => Math.max(i - 1, 0));
-  }, []);
+  const prev = useCallback(() => setIndex((i) => Math.max(i - 1, 0)), []);
 
   async function submitCode(event: React.FormEvent) {
     event.preventDefault();
@@ -104,30 +104,35 @@ export default function Slaytlar() {
 
   return (
     <div className="deck">
-      <div className="deck-bar">
-        <span className="deck-name">{current.deck.name}</span>
-        <span className="deck-when">{current.deck.when}</span>
-        <span className="deck-count">
+      <div className="deck-progress">
+        <span style={{ width: `${((index + 1) / TOTAL) * 100}%` }} />
+      </div>
+
+      <div className="deck-stage">
+        <div className="slide-frame">
+          <SlideView key={index} slide={current.slide} />
+        </div>
+      </div>
+
+      <div className="deck-meta">
+        <b>{current.deck.name}</b>
+        <span>
           {index + 1} / {TOTAL}
         </span>
       </div>
 
-      <div className="deck-stage">
-        <SlideView slide={current.slide} />
-      </div>
-
       {showNotes && (
         <div className="deck-note">
-          <strong>Eğitmen notu:</strong> {note ?? "—"}
+          <b>Eğitmen notu ·</b> {note ?? "bu slayt için not yok"}
         </div>
       )}
 
-      <div className="deck-controls">
+      <div className="deck-chrome">
         <button className="deck-btn" onClick={prev} disabled={index === 0}>
           ← Önceki
         </button>
         <span className="deck-hint">
-          {unlocked ? "N: not · F: tam ekran" : "İlerlemek için kod gerekiyor"}
+          {unlocked ? "N: eğitmen notu · F: tam ekran" : "İlerlemek için kod gerekiyor"}
         </span>
         <button className="deck-btn primary" onClick={next} disabled={index === TOTAL - 1}>
           Sonraki →
@@ -137,6 +142,7 @@ export default function Slaytlar() {
       {gateOpen && (
         <div className="gate" role="dialog" aria-modal="true">
           <form className="gate-box" onSubmit={submitCode}>
+            <RlayHubLogo className="gate-logo" />
             <div className="gate-title">Sonraki slayt için kod</div>
             <p className="gate-sub">
               {configured
@@ -178,141 +184,4 @@ export default function Slaytlar() {
       )}
     </div>
   );
-}
-
-function SlideView({ slide }: { slide: Slide }) {
-  switch (slide.kind) {
-    case "kapak":
-      return (
-        <section className={`slide kapak${slide.theme === "dark" ? " dark" : ""}`}>
-          <span className="kapak-label">{slide.label}</span>
-          <h1 className="kapak-title">{slide.title}</h1>
-          <p className="kapak-sub">{slide.subtitle}</p>
-          <span className="dot dot-tl" />
-          <span className="dot dot-br" />
-        </section>
-      );
-
-    case "cumle":
-      return (
-        <section className="slide cumle">
-          <p className="cumle-text">{slide.text}</p>
-          <span className="dot dot-tl" />
-          <span className="dot dot-br" />
-        </section>
-      );
-
-    case "govde":
-      return (
-        <section className="slide govde">
-          <h2 className="slide-title">{slide.title}</h2>
-          <div className="govde-body">
-            {slide.body.map((line) => (
-              <p key={line}>{line}</p>
-            ))}
-          </div>
-          <span className="dot dot-soft" />
-        </section>
-      );
-
-    case "kart":
-      return (
-        <section className="slide">
-          <h2 className="slide-title">{slide.title}</h2>
-          <div className="kart-grid">
-            {slide.cards.map((card, i) => (
-              <div className="kart" key={card.title}>
-                <span className="kart-num">{i + 1}</span>
-                <h3 className="kart-title">{card.title}</h3>
-                <p className="kart-text">{card.text}</p>
-              </div>
-            ))}
-          </div>
-          <span className="dot dot-soft" />
-        </section>
-      );
-
-    case "ikiSutun":
-      return (
-        <section className="slide">
-          <h2 className="slide-title">{slide.title}</h2>
-          <div className="sutun-grid">
-            <div className="sutun light">
-              <h3>{slide.left.title}</h3>
-              <ul>
-                {slide.left.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="sutun solid">
-              <h3>{slide.right.title}</h3>
-              <ul>
-                {slide.right.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-      );
-
-    case "adimlar":
-      return (
-        <section className="slide">
-          <h2 className="slide-title">{slide.title}</h2>
-          <div className="adim-row">
-            {slide.steps.map((step, i) => (
-              <div className={`adim${i % 2 === 0 ? " solid" : " light"}`} key={step}>
-                <span className="adim-num">{i + 1}</span>
-                <span className="adim-text">{step}</span>
-              </div>
-            ))}
-          </div>
-          <span className="dot dot-soft" />
-        </section>
-      );
-
-    case "liste":
-      return (
-        <section className="slide">
-          <h2 className="slide-title">{slide.title}</h2>
-          <ol className="liste">
-            {slide.items.map((item, i) => (
-              <li key={item}>
-                <span className="liste-num">{i + 1}</span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ol>
-          <span className="dot dot-soft" />
-        </section>
-      );
-
-    case "rakam":
-      return (
-        <section className="slide rakam">
-          <div className="rakam-value">{slide.value}</div>
-          <p className="rakam-text">{slide.text}</p>
-          <span className="dot dot-soft" />
-        </section>
-      );
-
-    case "kod":
-      return (
-        <section className="slide">
-          <h2 className="slide-title">{slide.title}</h2>
-          <div className="kod-grid">
-            <pre className="kod-block">
-              <code>{slide.code}</code>
-            </pre>
-            <ul className="kod-notes">
-              {slide.notes.map((n) => (
-                <li key={n}>{n}</li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      );
-  }
 }
