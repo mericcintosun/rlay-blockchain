@@ -10,41 +10,41 @@ Claude her adımda durur, sen "devam" dedikçe ilerler.
 
 # GÜN 1 — Kod yok, kavram var
 
-### GÜN 1 · 10.00–10.45 · Blokzincir nedir
-**Aç:** Deck 01 (ders dosyası yok)
+### GÜN 1 · 10.00–10.45 · [SLAYT] Güven Problemi: Neden merkeziyetsizlik?
+**Aç:** `sirince-onchain.vercel.app/slaytlar` → **Deck 1**, 18 slayt
 **Öğrenci:** Laptop kapalı. Sadece dinliyor.
-**Sen:** Slayttan anlat. Kod yok, terminal yok, jargon yok.
+**Sen:** Sıfır teknik terim. Slayt 2'de 30 saniye sus. Slayt 6'yı **atlama**.
 **Tahtaya yaz:** "Blokzincir = kimsenin tek başına değiştiremediği ortak defter."
 **Süre uyarısı:** Soru-cevap uzar. 10 dakikadan fazla verme, "yarın kodla göreceğiz" de.
-**İnternet giderse:** Etkilenmez.
+**İnternet giderse:** Slaytlar açıksa devam eder — sekmeyi **kapatma** (kodu bağlıyken girmiş ol).
 **Bittiğinde öğrencide ne var:** Bir cümlelik tanım ve merak.
 
-### GÜN 1 · 11.00–11.45 · Kağıt oyunu
-**Aç:** Deck 02 + kağıt, kalem (ders dosyası yok)
-**Öğrenci:** Gruplara ayrılmış, masada kağıt.
-**Sen:** Sınıf elle defter tutar; biri geçmişi değiştirmeye kalkar, sınıf yakalar.
+### GÜN 1 · 11.00–11.45 · [OYUN · laptopsuz] Köy Defteri Oyunu
+**Aç:** Tahta + kağıt, kalem. Slayt yok, laptop yok.
+**Öğrenci:** Laptoplar **kapalı**. Gruplara ayrılmış.
+**Sen:** Tahtada ortak defter tut. Bir öğrenciye gizlice "aynı parayı iki kişiye gönder" görevi ver.
 **Tahtaya yaz:** "Geçmişi değiştirmek için herkesi aynı anda kandırman gerekir."
-**Süre uyarısı:** Kuralı anlatmak uzar. 5 dakikada oyunu başlat, kalan süre oynansın.
+**Süre uyarısı:** Kuralı 5 dakikada anlat, kalan 40 dakika oynansın.
 **İnternet giderse:** Etkilenmez. Bağlantı çökerse **bu dersi uzat**, sonrakini kaydır.
-**Bittiğinde öğrencide ne var:** "Neden değiştirilemiyor" sorusunun sezgisel cevabı.
+**Bittiğinde öğrencide ne var:** Mutabakat ve mühür kavramını kendileri keşfetmiş olur.
 
-### GÜN 1 · 14.00–14.45 · Cüzdan kurulumu
-**Aç:** Tarayıcı + MetaMask (ders dosyası yok)
+### GÜN 1 · 14.00–14.45 · [UYGULAMA] İlk Cüzdan + İlk Transfer
+**Aç:** Tarayıcı + MetaMask + senin dağıtım cüzdanın. **Repo yok, terminal yok.**
 **Öğrenci:** Laptop açık, tarayıcı hazır.
-**Sen:** MetaMask kurdur. Seed phrase **kağıda** yazılsın — ekran görüntüsü aldırma.
+**Sen:** Cüzdan kurdur → Base Sepolia'ya geçirt → adresleri **tek kağıtta** topla → parayı dağıt → birbirlerine transfer yaptır.
 **Tahtaya yaz:** "Seed phrase'ini kimse senden istemez. İsteyen dolandırıcıdır."
-**Süre uyarısı:** Eklenti kurulumu yavaş. 20 dakikada bitir, kalanı güvenlik konuş.
-**İnternet giderse:** Ders yapılamaz (eklenti mağazası lazım) → kağıt oyununu uzat, bunu akşama al.
-**Bittiğinde öğrencide ne var:** Çalışan cüzdan + kağıda yazılmış seed phrase.
+**Süre uyarısı:** ⚠️ Kurulum 20 dk'yı geçerse transfer'e vakit kalmaz — **sonraki oturum transfer'e bağlı.**
+**İnternet giderse:** ❌ Kurtarılamaz. Oyunu uzat, bunu akşama al ama **mutlaka yap**.
+**Bittiğinde öğrencide ne var:** Parası olan cüzdan + gönderdiği **en az bir işlem**.
 
-### GÜN 1 · 15.00–15.45 · Test ağı ve para dağıtımı
-**Aç:** Tarayıcı + senin dağıtım cüzdanın (ders dosyası yok)
-**Öğrenci:** Cüzdanı Base Sepolia'ya almış, adresini yazmış.
-**Sen:** Adresleri **tek kağıtta** topla, muslukla uğraşma: `cast send <ADRES> --value 0.01ether --rpc-url base_sepolia --private-key $PRIVATE_KEY`
-**Tahtaya yaz:** "Testnet parası oyuncak. İşlem gerçek."
-**Süre uyarısı:** Adres toplama kaotiktir. Tek liste dolaştır, sırayla.
-**İnternet giderse:** ❌ Kurtarılamaz. Gün 2 sabahına al ama **mutlaka yap** — Gün 2·3 buna bağlı.
-**Bittiğinde öğrencide ne var:** Base Sepolia'da bakiyesi olan cüzdan.
+### GÜN 1 · 15.00–15.45 · [SLAYT + UYGULAMA] Bir İşlemin Yolculuğu
+**Aç:** **Deck 2** (8 slayt), sonra `sepolia.basescan.org`
+**Öğrenci:** Öğleden önce yaptığı transfer elinde olmalı — safari buna dayanıyor.
+**Sen:** 8 slaydı 20 dakikada bitir, kalan 25 dakika explorer safarisi + görev kartı yarışması.
+**Tahtaya yaz:** "Geri alma tuşu yok."
+**Süre uyarısı:** Slaytlarda oyalanma. Asıl iş son slayttaki 5 maddelik görev kartı.
+**İnternet giderse:** ❌ Explorer şart. Slaytları anlat, safariyi Gün 2 sabahına kaydır.
+**Bittiğinde öğrencide ne var:** Explorer'da kendi işlemini okuyabilen öğrenci.
 
 ---
 
