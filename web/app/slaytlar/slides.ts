@@ -1,9 +1,11 @@
-// Slide content for the six camp decks (59 slides).
+// Slide content for the six camp decks (63 slides).
 // Layout kinds follow the RBW 2026 brand guide: kapak, cumle, govde, kart,
-// ikiSutun, adimlar, liste, rakam, kod.
+// ikiSutun, adimlar, liste, rakam, kod, diyagram.
 //
 // `note` is an instructor-only note. It is hidden by default in the viewer and
 // toggled with the N key, so it never lands on the projector by accident.
+
+import type { DiagramKey } from "./diagrams";
 
 export type Column = {
   title: string;
@@ -19,7 +21,8 @@ export type Slide =
   | { kind: "adimlar"; title: string; steps: string[]; note?: string }
   | { kind: "liste"; title: string; items: string[]; note?: string }
   | { kind: "rakam"; value: string; text: string; note?: string }
-  | { kind: "kod"; title: string; code: string; notes: string[]; note?: string };
+  | { kind: "kod"; title: string; code: string; notes: string[]; note?: string }
+  | { kind: "diyagram"; title: string; diagram: DiagramKey; note?: string };
 
 export type Deck = {
   id: string;
@@ -102,13 +105,10 @@ export const DECKS: Deck[] = [
         text: "Ya defteri tek bir kurum değil, HERKES aynı anda tutsaydı?",
       },
       {
-        kind: "kart",
+        kind: "diyagram",
         title: "Üç model",
-        cards: [
-          { title: "Merkezi", text: "Tek bir merkez her şeyi bilir ve karar verir." },
-          { title: "Dağıtık", text: "Birden çok merkez var ama yine de merkezler var." },
-          { title: "Merkeziyetsiz", text: "Merkez yok. Herkes aynı defterin kopyasını tutar." },
-        ],
+        diagram: "ucModel",
+        note: "Üçünü tahtaya da çiz. Sınıfa sor: köyün defteri hangisine benziyor?",
       },
       {
         kind: "liste",
@@ -129,6 +129,12 @@ export const DECKS: Deck[] = [
           "Yani geçmişi sessizce değiştiremezsin. Herkes fark eder.",
         ],
         note: '"Hash" kelimesini kullanma. Mühür yeterli.',
+      },
+      {
+        kind: "diyagram",
+        title: "Bir sayfayı değiştirirsen ne olur?",
+        diagram: "muhurZinciri",
+        note: "Sayfa 2'yi göster, sonra 3 ve 4'ü göster. Cevabı sen söyleme, sınıf söylesin.",
       },
       {
         kind: "govde",
@@ -221,9 +227,9 @@ export const DECKS: Deck[] = [
         subtitle: "Bir işlemin hayat döngüsü",
       },
       {
-        kind: "adimlar",
+        kind: "diyagram",
         title: "Beş adım",
-        steps: ["İMZALA", "AĞA DUYUR", "BEKLEME HAVUZU", "BLOĞA GİR", "ONAYLANDI"],
+        diagram: "islemYolculugu",
         note: "Tahtaya da çiz, dört gün boyunca silme.",
       },
       {
@@ -268,6 +274,12 @@ export const DECKS: Deck[] = [
             "Servis dolmuşuyla gitmek gibi",
           ],
         },
+      },
+      {
+        kind: "diyagram",
+        title: "Zarf nasıl çalışıyor?",
+        diagram: "l2Zarf",
+        note: "Ücreti zarfın tamamı ödüyor, içindekiler bölüşüyor. Bugün L2 kullanıyoruz.",
       },
       {
         kind: "cumle",
@@ -337,6 +349,12 @@ export const DECKS: Deck[] = [
             text: '"Şu oldu" diye ağa bıraktığı iz. Sonra bunu okuyacağız.',
           },
         ],
+      },
+      {
+        kind: "diyagram",
+        title: "Üçü birlikte nasıl duruyor?",
+        diagram: "kontratAnatomisi",
+        note: "Bir sonraki slaytta bunun kodunu göreceğiz. Önce şekli otursun.",
       },
       {
         kind: "kod",
@@ -536,6 +554,12 @@ export const DECKS: Deck[] = [
           "Saldırgan, para gelir gelmez aynı fonksiyonu tekrar çağırdı.",
           "Kasa hâlâ eski bakiyeye bakıyordu. Tekrar gönderdi. Ve tekrar. Ve tekrar.",
         ],
+      },
+      {
+        kind: "diyagram",
+        title: "Döngü",
+        diagram: "reentrancyDongusu",
+        note: "Okları tek tek göster. 4'ten 2'ye dönüşü parmağınla takip ettir - kilit an orası.",
       },
       {
         kind: "cumle",

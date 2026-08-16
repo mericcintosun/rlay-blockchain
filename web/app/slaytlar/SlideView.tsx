@@ -1,4 +1,5 @@
 import { RlayHubLogo } from "../RlayHubLogo";
+import { DIAGRAMS } from "./diagrams";
 import type { Slide } from "./slides";
 
 /** Brand rule: the logo sits bottom-right of every slide, colour flipped by theme. */
@@ -129,6 +130,19 @@ export function SlideView({ slide }: { slide: Slide }) {
           <Logo />
         </section>
       );
+
+    case "diyagram": {
+      const Diagram = DIAGRAMS[slide.diagram];
+      return (
+        <section className="slide">
+          <h2 className="slide-title">{slide.title}</h2>
+          <div className="diyagram-wrap">
+            <Diagram />
+          </div>
+          <Logo />
+        </section>
+      );
+    }
 
     case "kod":
       return (
