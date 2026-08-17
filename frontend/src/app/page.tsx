@@ -5,7 +5,7 @@ import { PoolStatus } from "@/components/PoolStatus";
 
 // brand.md §5: hero -> canlı havuz durumu -> 3 adım -> claim -> bakiye -> gönder.
 const STEPS = [
-  { title: "Cüzdanını bağla", detail: "Tarayıcı cüzdanı ya da QR ile mobil cüzdan." },
+  { title: "Cüzdanını bağla", detail: "MetaMask, Rabby ya da Coinbase Wallet eklentisi." },
   { title: "Base Sepolia'ya geç", detail: "Yanlış ağdaysan tek tıkla geçirebilirsin." },
   { title: "Claim et", detail: "RLAY tek işlemde doğrudan cüzdanına gelir." },
 ];
