@@ -1,0 +1,52 @@
+name: contracts
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+
+      # Only the RLAY contracts are format-checked. The Day 2/3 teaching
+      # contracts predate this workflow and are intentionally left alone
+      # (see CLAUDE.md - Kasa.sol must never be "fixed").
+      - name: Check formatting
+        working-directory: contracts
+        run: |
+          forge fmt --check \
+            src/RlayToken.sol \
+            src/RlayClaim.sol \
+            script/DeployRlay.s.sol \
+            test/RlayToken.t.sol \
+            test/RlayClaim.t.sol \
+            test/RlayClaim.fuzz.t.sol \
+            test/DeployRlay.t.sol \
+            test/invariant/RlayInvariant.t.sol
+
+      - name: Build
+        working-directory: contracts
+        run: forge build
+
+      # DeployRlay.t.sol forks Base Sepolia, so it needs a reachable RPC.
+      - name: Test
+        working-directory: contracts
+        env:
+          BASE_SEPOLIA_RPC: ${{ secrets.BASE_SEPOLIA_RPC || 'https://sepolia.base.org' }}
+        run: forge test -vvv
+
+      - name: Coverage
+        working-directory: contracts
+        env:
+          BASE_SEPOLIA_RPC: ${{ secrets.BASE_SEPOLIA_RPC || 'https://sepolia.base.org' }}
+        run: forge coverage --report summary

@@ -18,7 +18,7 @@ Bu kadar. `forge test` yeşilse hazırsın.
 `--recurse-submodules` yazmayı unuttuysan: `forge install` çalıştır, aynı kapıya çıkar.
 
 > **`.env` nerede duracak:** `contracts/` klasörünün içinde, `foundry.toml`'un yanında.
-> Repo kökünde durursa Foundry onu **görmez** ve deploy günü `RPC_URL` bulunamaz.
+> Repo kökünde durursa Foundry onu **görmez** ve deploy günü `BASE_SEPOLIA_RPC` bulunamaz.
 
 Gün 1'de repo'ya ihtiyacın yok — sadece tarayıcı yeterli.
 
@@ -92,3 +92,16 @@ Gün 1 ve Gün 3'ün ilk oturumu slaytla anlatılır, ders dosyası yok.
 
 Base Sepolia testnet (chain id **84532**). Asla mainnet değil.
 Özel anahtarın sadece `contracts/.env` içinde durur. `.env` dosyasını **asla** commit etme.
+
+---
+
+## RLAY token
+
+Kampın kendi token'ı RLAY, Base Sepolia'da deploy edilmiş ve arkadaşlara açık bir claim
+sitesi var. Ayrıntılar ayrı dosyalarda:
+
+| Dosya | Ne var |
+|---|---|
+| `RLAY.md` | Kontrat adresleri, tx hash'leri, kurulum, test, deploy ve frontend adımları |
+| `brand.md` | RlayHub görsel kimliği: renk, tipografi, layout, UI/UX kuralları |
+| `frontend/` | RLAY claim arayüzü (Next.js + wagmi). `web/` kampın ders sitesidir, karıştırma. |

@@ -6,12 +6,20 @@ test = "test"
 script = "script"
 optimizer = true
 optimizer_runs = 200
+evm_version = "cancun"
 
 # Exercise contracts are compiled but not part of the main build target.
 # Kasa.sol is intentionally vulnerable - see CLAUDE.md.
 
+[fuzz]
+runs = 1000
+
+[invariant]
+runs = 256
+depth = 50
+
 [rpc_endpoints]
-base_sepolia = "${RPC_URL}"
+base_sepolia = "${BASE_SEPOLIA_RPC}"
 
 [etherscan]
-base_sepolia = { key = "${ETHERSCAN_API_KEY}" }
+base_sepolia = { key = "${BASESCAN_API_KEY}", chain = 84532 }

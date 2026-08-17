@@ -6,7 +6,7 @@ import {SirinceDefteri} from "../src/SirinceDefteri.sol";
 import {SirinceToken} from "../src/SirinceToken.sol";
 
 /// @notice Usage:
-///   forge script script/Deploy.s.sol --rpc-url $RPC_URL --broadcast --verify
+///   forge script script/Deploy.s.sol --rpc-url base_sepolia --broadcast --verify
 contract Deploy is Script {
     function run() external {
         vm.startBroadcast();
