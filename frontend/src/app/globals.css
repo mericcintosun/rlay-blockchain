@@ -1,0 +1,330 @@
+@import "tailwindcss";
+
+/* Brand tokens - see brand.md. Values come from web/app/globals.css so both
+   RlayHub sites share one identity. */
+@theme {
+  /* Marka moru. Dolgu olarak kullanıldığı her yerde (buton, logo, progress bar)
+     açık ve koyu temada AYNI kalır - marka rengi tema değiştirmez. */
+  --color-purple: #5a0fbe;
+  --color-purple-deep: #43089c;
+
+  /* Mor METİN için ayrı token. #5a0fbe koyu zeminde okunmuyor (kontrast ~2:1),
+     bu yüzden koyu temada aynı tonun açık varyantına geçer. Dolgu moru değişmez. */
+  --color-purple-ink: #43089c;
+
+  --color-surface: #ffffff;
+  --color-tint: #ede3fa;
+  --color-tint-soft: #f6f1fd;
+  --color-bg: #f7f8fa;
+  --color-ink: #0a0a0a;
+  --color-muted: #5b5b66;
+  --color-line: #e7e7ee;
+  --color-ok: #0a7d38;
+  --color-err: #b00020;
+
+  --font-sans: var(--font-poppins), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
+
+  /* Soft, low-contrast elevation. Cards should sit on the page, not float off it. */
+  --shadow-card: 0 1px 2px rgb(10 10 10 / 0.04), 0 8px 24px -12px rgb(10 10 10 / 0.08);
+  --shadow-raised: 0 2px 4px rgb(90 15 190 / 0.08), 0 16px 40px -16px rgb(90 15 190 / 0.18);
+}
+
+/* ---------------------------------------------------------------------------
+   Koyu tema. Tailwind utility'leri (bg-surface, text-ink, border-line...)
+   var(--color-*) referansı ürettiği için sadece token değerlerini ezmek yeterli;
+   hiçbir bileşende `dark:` varyantı yazmaya gerek kalmıyor.
+
+   Tema <html data-theme="..."> ile seçilir. Kullanıcı seçim yapmadıysa
+   prefers-color-scheme geçerli olur.
+   --------------------------------------------------------------------------- */
+
+@layer theme {
+  :root[data-theme="dark"] {
+    --color-surface: #15151c;
+    --color-tint: #251345;
+    --color-tint-soft: #1d0f36;
+    --color-bg: #0b0b10;
+    --color-ink: #f4f4f7;
+    --color-muted: #a0a0ae;
+    --color-line: #282833;
+    --color-ok: #3ecf7a;
+    --color-err: #ff7085;
+
+    --color-purple-ink: #bb92f7;
+
+    /* Koyu zeminde yumuşak gölge görünmez; derinlik daha koyu gölgeyle verilir. */
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.5), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+    --shadow-raised: 0 2px 6px rgb(0 0 0 / 0.5), 0 18px 44px -16px rgb(90 15 190 / 0.45);
+
+    color-scheme: dark;
+  }
+
+  /* Sistem tercihi koyu ve kullanıcı açık temayı açıkça seçmediyse. */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --color-surface: #15151c;
+      --color-tint: #251345;
+      --color-tint-soft: #1d0f36;
+      --color-bg: #0b0b10;
+      --color-ink: #f4f4f7;
+      --color-muted: #a0a0ae;
+      --color-line: #282833;
+      --color-ok: #3ecf7a;
+      --color-err: #ff7085;
+
+      --color-purple-ink: #bb92f7;
+
+      --shadow-card: 0 1px 2px rgb(0 0 0 / 0.5), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+      --shadow-raised: 0 2px 6px rgb(0 0 0 / 0.5), 0 18px 44px -16px rgb(90 15 190 / 0.45);
+
+      color-scheme: dark;
+    }
+  }
+}
+
+/* IMPORTANT: element-level styling goes in @layer base, never unlayered.
+   Unlayered CSS outranks Tailwind's @layer utilities, so a bare
+   `* { margin: 0 }` reset would silently kill every margin and padding
+   utility on the page. That bug is what made the first version look broken. */
+@layer base {
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  /* Yatay taşmaya karşı son emniyet: hiçbir durumda sayfa yana kaymamalı. */
+  html {
+    overflow-x: hidden;
+  }
+
+  h1 {
+    font-size: clamp(1.95rem, 7vw, 3.25rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    overflow-wrap: break-word;
+  }
+
+  h2 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  /* Visible focus everywhere - brand.md §8. */
+  :focus-visible {
+    outline: 2px solid var(--color-purple);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* ---------- RlayHub lockup (brand.md §4) ---------- */
+
+  .rlayhub {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    line-height: 1;
+    color: inherit;
+  }
+
+  .rlayhub-mark {
+    width: 1.05em;
+    height: 1.05em;
+    flex: none;
+  }
+
+  .rlayhub-word {
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+
+  /* ---------- surfaces ---------- */
+
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 1.15rem;
+    box-shadow: var(--shadow-card);
+    padding: 1.75rem;
+  }
+
+  /* The claim card is the one action on the page - it gets more presence. */
+  .card-raised {
+    background: var(--color-surface);
+    border: 1px solid var(--color-tint);
+    border-radius: 1.15rem;
+    box-shadow: var(--shadow-raised);
+    padding: 1.75rem;
+  }
+
+  /* Sticky navbar / footer yüzeyi. Yarı saydamlık token üzerinden kurulur ki
+     tema değişince kendiliğinden doğru renge gitsin. */
+  .site-surface {
+    background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+    backdrop-filter: blur(12px);
+  }
+
+  /* ---------- type helpers ---------- */
+
+  .label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--color-muted);
+    text-transform: uppercase;
+  }
+
+  .value {
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    word-break: break-word;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--color-tint);
+    color: var(--color-purple-ink);
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  .addr {
+    background: var(--color-tint);
+    color: var(--color-purple-ink);
+    border-radius: 0.5rem;
+    padding: 0.35rem 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    display: inline-block;
+  }
+
+  /* ---------- buttons ---------- */
+
+  /* Explicit classes, not a bare `button` selector: the page has both
+     full-width primary actions and small inline ones. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--color-purple);
+    color: #fff;
+    border: 1px solid transparent;
+    border-radius: 0.75rem;
+    padding: 0.85rem 1.4rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      background 0.15s ease,
+      transform 0.1s ease;
+  }
+
+  .btn:hover:not(:disabled) {
+    background: var(--color-purple-deep);
+  }
+
+  .btn:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .btn-secondary {
+    background: var(--color-surface);
+    color: var(--color-purple-ink);
+    border-color: var(--color-tint);
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background: var(--color-tint-soft);
+  }
+
+  .btn-block {
+    width: 100%;
+  }
+
+  /* Kare ikon butonu (tema anahtarı). .btn'in renk mantığını paylaşmaz -
+     nötr kalır ki navbar'da mor butonla yarışmasın. */
+  .btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    flex: none;
+    background: var(--color-surface);
+    color: var(--color-muted);
+    border: 1px solid var(--color-line);
+    border-radius: 0.7rem;
+    cursor: pointer;
+    transition:
+      color 0.15s ease,
+      background 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .btn-icon:hover {
+    color: var(--color-purple-ink);
+    border-color: var(--color-tint);
+    background: var(--color-tint-soft);
+  }
+
+  /* ---------- form ---------- */
+
+  .field {
+    width: 100%;
+    background: var(--color-surface);
+    color: var(--color-ink);
+    border: 1px solid var(--color-line);
+    border-radius: 0.75rem;
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    font-family: var(--font-mono);
+  }
+
+  .field::placeholder {
+    color: var(--color-muted);
+    opacity: 0.7;
+    font-family: var(--font-sans);
+  }
+
+  .field:focus {
+    border-color: var(--color-purple);
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(90 15 190 / 0.1);
+  }
+
+  /* ---------- status messages (brand.md §8: never colour alone) ---------- */
+
+  .err {
+    color: var(--color-err);
+    font-size: 0.85rem;
+  }
+
+  .ok {
+    color: var(--color-ok);
+    font-size: 0.85rem;
+  }
+}
