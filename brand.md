@@ -211,11 +211,11 @@ Başlık kullanıcının nerede olduğunu söyler, açıklama ne yapacağını.
 
 | Durum | Başlık | Buton |
 |---|---|---|
-| Cüzdan bağlı değil | "Cüzdanını bağla" | Tarayıcı cüzdanı (birincil) + Mobil cüzdan (ikincil) |
+| Cüzdan bağlı değil | "Cüzdanını bağla" | "Wallet Extension ile bağlan" |
 | Yanlış ağda | "Yanlış ağdasın" | "Base Sepolia'ya geç" |
 | Claim edilebilir | "1.000.000 RLAY seni bekliyor" | "Claim et" |
 | Tx pending | "İşlem onaylanıyor" | devre dışı, "Gönderiliyor…" |
-| Tx başarılı | "RLAY cüzdanında" | — (Basescan linki) |
+| Tx başarılı | "RLAY cüzdanında 🎉" | — (Basescan linki) |
 | Zaten claim etmiş | "Bu cüzdan claim etti" | — |
 | Havuz boş | "Kontenjan doldu" | — |
 | Süre dolmuş | "Süre doldu" | — |
@@ -223,8 +223,24 @@ Başlık kullanıcının nerede olduğunu söyler, açıklama ne yapacağını.
 | Kullanıcı reddetti | "İşlemi iptal ettin" | "Tekrar dene" |
 | Beklenmeyen hata | "Bir şeyler ters gitti" | "Tekrar dene" |
 
-**Cüzdan etiketleri çevrilir.** wagmi connector adları kullanıcıya anlamsız
-("Injected" gibi) — arayüzde "Tarayıcı cüzdanı" ve "Mobil cüzdan (QR kod)" yazar.
+**Cüzdan etiketi.** wagmi connector adları kullanıcıya anlamsız ("Injected" gibi).
+Arayüzde tek bir birincil buton var: **"Wallet Extension ile bağlan"**, altında
+hangi cüzdanların desteklendiğini söyleyen bir satır. Yalnızca `injected`
+connector kullanılıyor — WalletConnect kaldırıldı, çünkü harici bir proje kimliği
+ve alan adı izni gerektiriyordu.
+
+**Başarı anı kutlanır.** Claim zincire yazıldığında bir kereliğine havai fişek
+animasyonu (`Fireworks`) çalışır ve metin teşekkür tonuna geçer — bu, kullanıcının
+sayfada yaşadığı tek dönüm noktası, kuru bir "işlem başarılı" satırı yeterli değil.
+Animasyon `prefers-reduced-motion` tercihine saygı gösterir ve tıklamaları
+engellemez.
+
+### İmza
+
+Footer'ın en altında, ayırıcı çizginin ardından ortalanmış **"made by yavascan"**
+bloğu: 40px yuvarlak profil fotoğrafı + iki satır metin, `x.com/akadropcan`
+adresine gider. Fotoğraf `public/` altından servis edilir, dışarıya hotlink
+verilmez.
 
 ---
 

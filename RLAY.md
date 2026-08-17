@@ -133,8 +133,8 @@ npm install
 cp .env.example .env.local
 ```
 
-`.env.local` içine `NEXT_PUBLIC_WC_PROJECT_ID` gerekiyor — [cloud.reown.com](https://cloud.reown.com)
-üzerinden ücretsiz alınır ("Create Project"). Bu **public** bir değer, gizli anahtar değil.
+`.env.example` içindeki değerler doğrudan çalışır; hepsi public (chain id, kontrat
+adresleri, public RPC). Gizli anahtar gerekmiyor.
 
 ---
 
@@ -232,15 +232,16 @@ frontend/src/
 
 Next.js 16 (App Router) · TypeScript · TailwindCSS 4 · wagmi 3 · viem 2
 
-Cüzdan bağlantısı için harici modal kütüphanesi yok — wagmi'nin kendi
-`injected` (MetaMask, Rabby, Coinbase eklentisi) ve `walletConnect` (QR ile mobil)
-connector'ları kullanılıyor, buton `brand.md`'deki marka stiline birebir uyuyor.
+Cüzdan bağlantısı için harici modal kütüphanesi yok — wagmi'nin kendi `injected`
+connector'ı kullanılıyor (MetaMask, Rabby, Coinbase eklentisi), buton
+`brand.md`'deki marka stiline birebir uyuyor. WalletConnect kaldırıldı: harici bir
+proje kimliği ve alan adı izni gerektiriyordu, bu dağıtım için gereksiz bir bağımlılık.
 
 ### Claim arayüzünün karşıladığı durumlar
 
 Cüzdan bağlı değil · yanlış ağda (tek tıkla Base Sepolia'ya geçiş) · claim edebilir ·
-tx pending · tx başarılı (Basescan linkiyle) · zaten claim etmiş · havuz boş ·
-süre dolmuş · kullanıcı tx'i reddetti.
+tx pending · tx başarılı (Basescan linkiyle + havai fişek) · zaten claim etmiş ·
+havuz boş · süre dolmuş · duraklatıldı · kullanıcı tx'i reddetti · beklenmeyen hata.
 
 ---
 
@@ -248,8 +249,7 @@ süre dolmuş · kullanıcı tx'i reddetti.
 
 - `PRIVATE_KEY` ve `BASESCAN_API_KEY` **asla** `NEXT_PUBLIC_` almaz, frontend bundle'ına
   girmez. Sadece `contracts/.env` içinde yaşar, `.gitignore`'da.
-- Frontend'e giden her şey public: chain id, kontrat adresleri, ABI, public RPC,
-  WalletConnect Project ID.
+- Frontend'e giden her şey public: chain id, kontrat adresleri, ABI, public RPC.
 - `.gitignore`: `.env*` (ama `.env.example` hariç), `out/`, `cache/`, `broadcast/`,
   `node_modules/`, `.next/`, `lib/`, `*.keystore`.
 - Site hiçbir yerde private key veya seed phrase istemez.

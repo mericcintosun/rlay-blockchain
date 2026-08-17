@@ -5,6 +5,7 @@ import { baseSepolia } from "wagmi/chains";
 import { formatUnits } from "viem";
 import { ConnectButton } from "@/components/ConnectButton";
 import { TxStatus } from "@/components/TxStatus";
+import { Fireworks } from "@/components/Fireworks";
 import { useClaim } from "@/hooks/useClaim";
 
 /// Tek kart, tek an, tek durum (brand.md §5 ve §7). Durum mantığının tamamı
@@ -76,10 +77,16 @@ export function ClaimCard() {
 
       {status === "success" && (
         <>
-          <h2 className="mt-2">RLAY cüzdanında</h2>
-          <p className="mt-1.5 text-sm text-muted">
-            Claim tamamlandı. Token&apos;ı cüzdanına eklemek istersen RLAY kontrat adresini
-            kullanabilirsin.
+          {/* Tek seferlik kutlama - claim gerçekten zincire yazıldığında patlar. */}
+          <Fireworks />
+
+          <h2 className="mt-2">RLAY cüzdanında 🎉</h2>
+          <p className="mt-3 leading-relaxed">
+            Sonsuzluğa uzanan web3 serüvenimizde cüzdanına RLAY&apos;i alarak bu ana bir iz
+            bıraktığın için teşekkürler.
+          </p>
+          <p className="mt-3 text-sm text-muted">
+            Bu token artık senin — kimse geri alamaz, kimse çoğaltamaz. Zincirde kalıcı.
           </p>
           <div className="mt-4">
             <TxStatus state="success" txHash={txHash} />

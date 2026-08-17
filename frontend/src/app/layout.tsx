@@ -104,6 +104,30 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 ağıdır, RLAY&apos;in parasal değeri yoktur. Özel anahtarını veya kurtarma
                 cümlelerini hiçbir siteye ve hiç kimseye verme — bu site de asla istemez.
               </div>
+
+              {/* İmza */}
+              <div className="mt-8 flex justify-center border-t border-line pt-8">
+                <a
+                  href="https://x.com/akadropcan"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group inline-flex items-center gap-3 no-underline"
+                >
+                  <img
+                    src="/yavascan.jpg"
+                    alt="yavascan"
+                    width={40}
+                    height={40}
+                    className="size-10 rounded-full border border-line object-cover"
+                  />
+                  <span className="text-sm leading-tight">
+                    <span className="block text-muted">made by</span>
+                    <span className="text-purple-ink block font-semibold group-hover:underline">
+                      yavascan
+                    </span>
+                  </span>
+                </a>
+              </div>
             </div>
           </footer>
         </Providers>

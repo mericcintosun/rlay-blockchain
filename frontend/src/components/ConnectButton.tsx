@@ -2,12 +2,14 @@
 
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 
-/// Cüzdan bağlama arayüzü. Harici modal kütüphanesi yok - wagmi'nin kendi
-/// connector'ları doğrudan kullanılıyor, butonlar brand.md §6 stiliyle aynı.
+/// Cüzdan bağlama arayüzü. Tek connector var (injected), bu yüzden liste değil
+/// tek bir birincil buton gösteriyoruz.
 export function ConnectButton({ compact = false }: { compact?: boolean }) {
   const { address, isConnected } = useAccount();
-  const { connectors, connect, isPending } = useConnect();
+  const { connectors, connect, isPending, error } = useConnect();
   const { disconnect } = useDisconnect();
+
+  const connector = connectors[0];
 
   if (isConnected && address) {
     return (
@@ -20,15 +22,13 @@ export function ConnectButton({ compact = false }: { compact?: boolean }) {
     );
   }
 
-  // Navbar'da tek buton yeter - ilk connector'a bağlanır, tam liste claim kartında.
   if (compact) {
-    const primary = connectors[0];
     return (
       <button
         type="button"
         className="btn"
-        disabled={isPending || !primary}
-        onClick={() => primary && connect({ connector: primary })}
+        disabled={isPending || !connector}
+        onClick={() => connector && connect({ connector })}
       >
         {isPending ? "Bağlanıyor…" : "Cüzdan bağla"}
       </button>
@@ -37,28 +37,41 @@ export function ConnectButton({ compact = false }: { compact?: boolean }) {
 
   return (
     <div className="flex flex-col gap-2">
-      {connectors.map((connector, index) => (
-        <button
-          key={connector.uid}
-          type="button"
-          // İlk seçenek birincil (mor), diğerleri ikincil - iki mor buton yan yana
-          // durunca hangisinin ana yol olduğu kaybolur.
-          className={`btn btn-block ${index === 0 ? "" : "btn-secondary"}`}
-          disabled={isPending}
-          onClick={() => connect({ connector })}
-        >
-          {isPending ? "Bağlanıyor…" : connectorLabel(connector.name, connector.type)}
-        </button>
-      ))}
+      <button
+        type="button"
+        className="btn btn-block"
+        disabled={isPending || !connector}
+        onClick={() => connector && connect({ connector })}
+      >
+        <WalletIcon />
+        {isPending ? "Bağlanıyor…" : "Wallet Extension ile bağlan"}
+      </button>
+
+      <p className="text-xs text-muted">MetaMask, Rabby ve Coinbase Wallet destekleniyor.</p>
+
+      {error && <p className="err">Cüzdan bağlanamadı, tekrar dener misin?</p>}
     </div>
   );
 }
 
-/// wagmi connector adları kullanıcıya anlamlı değil ("Injected" gibi) - çeviriyoruz.
-function connectorLabel(name: string, type: string): string {
-  if (type === "walletConnect" || name === "WalletConnect") return "Mobil cüzdan (QR kod)";
-  if (name === "Injected" || name === "Browser Wallet") return "Tarayıcı cüzdanı";
-  return name;
+function WalletIcon() {
+  return (
+    <svg
+      width="17"
+      height="17"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H18a2 2 0 0 1 2 2v1" />
+      <path d="M3 7.5V17a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3" />
+      <path d="M21 10.5h-4a1.75 1.75 0 0 0 0 3.5h4" />
+    </svg>
+  );
 }
 
 function shortenAddress(address: string): string {
