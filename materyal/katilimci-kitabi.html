@@ -1,0 +1,1580 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>RlayHub Blokzincir Kampi Katilimci Kitabi</title>
+<style>
+@page { size: A4; margin: 20mm 17mm 18mm 17mm; }
+
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 10.5pt;
+  line-height: 1.62;
+  color: #000;
+  background: #fff;
+  margin: 0;
+}
+
+h1, h2, h3, h4, .sans { font-family: Helvetica, Arial, sans-serif; }
+
+h1 {
+  font-size: 21pt;
+  line-height: 1.18;
+  margin: 0 0 6mm;
+  padding-bottom: 3mm;
+  border-bottom: 1.6pt solid #000;
+  page-break-before: always;
+  page-break-after: avoid;
+}
+
+h2 {
+  font-size: 13.5pt;
+  margin: 9mm 0 3mm;
+  page-break-after: avoid;
+}
+
+h3 {
+  font-size: 11pt;
+  margin: 6mm 0 2mm;
+  page-break-after: avoid;
+}
+
+h4 {
+  font-size: 10pt;
+  margin: 5mm 0 1.5mm;
+  font-weight: 700;
+  page-break-after: avoid;
+}
+
+p { margin: 0 0 3.2mm; orphans: 3; widows: 3; }
+
+ul, ol { margin: 0 0 3.6mm; padding-left: 6mm; }
+li { margin-bottom: 1.4mm; }
+
+code, pre, .mono { font-family: "SF Mono", Menlo, Consolas, monospace; }
+code { font-size: 9pt; }
+
+pre {
+  font-size: 8.6pt;
+  line-height: 1.5;
+  background: #f2f2f2;
+  border-left: 2.4pt solid #000;
+  padding: 3mm 4mm;
+  margin: 0 0 4mm;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  page-break-inside: avoid;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 4.5mm;
+  font-size: 9.4pt;
+  page-break-inside: avoid;
+}
+th, td { border: 0.5pt solid #000; padding: 1.8mm 2.4mm; text-align: left; vertical-align: top; }
+th { font-family: Helvetica, Arial, sans-serif; font-size: 8.8pt; font-weight: 700; background: #eaeaea; }
+
+blockquote {
+  margin: 0 0 4mm;
+  padding: 2.5mm 4mm;
+  border-left: 2.4pt solid #000;
+  background: #f7f7f7;
+  font-style: normal;
+}
+blockquote p:last-child { margin-bottom: 0; }
+
+.kutu {
+  border: 0.8pt solid #000;
+  padding: 3.5mm 4mm;
+  margin: 0 0 4.5mm;
+  page-break-inside: avoid;
+}
+.kutu p:last-child, .kutu ul:last-child, .kutu ol:last-child { margin-bottom: 0; }
+.kutu .baslik {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 8.4pt;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  margin-bottom: 2mm;
+}
+
+.kapak {
+  page-break-after: always;
+  padding-top: 55mm;
+  text-align: left;
+}
+.kapak .mark { font-size: 34pt; letter-spacing: -0.02em; }
+.kapak h1 {
+  page-break-before: auto;
+  border: 0;
+  font-size: 30pt;
+  line-height: 1.1;
+  margin: 14mm 0 5mm;
+  padding: 0;
+}
+.kapak .alt { font-size: 12pt; line-height: 1.55; }
+.kapak .kunye {
+  margin-top: 62mm;
+  padding-top: 4mm;
+  border-top: 1.2pt solid #000;
+  font-size: 9pt;
+  line-height: 1.7;
+}
+
+.icindekiler { page-break-after: always; }
+.icindekiler h1 { page-break-before: auto; }
+.icindekiler ol { padding-left: 0; list-style: none; }
+.icindekiler > ol > li {
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 10.5pt;
+  margin: 4mm 0 1.5mm;
+}
+.icindekiler ol ol {
+  padding-left: 5mm;
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: 9.6pt;
+}
+.icindekiler ol ol li { margin-bottom: 0.8mm; }
+
+.bolum-no {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 8.6pt;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 2mm;
+}
+
+.ozet {
+  font-size: 10pt;
+  border-bottom: 0.5pt solid #000;
+  padding-bottom: 4mm;
+  margin-bottom: 6mm;
+}
+
+.kontrol { list-style: none; padding-left: 0; }
+.kontrol li { padding-left: 7mm; text-indent: -7mm; margin-bottom: 1.8mm; }
+.kontrol li::before { content: "[ ]  "; font-family: monospace; font-weight: 700; }
+
+.not { font-size: 9.4pt; }
+hr { border: 0; border-top: 0.5pt solid #000; margin: 6mm 0; }
+.kucuk { font-size: 9pt; }
+strong { font-weight: 700; }
+</style>
+</head>
+<body>
+
+<section class="kapak">
+  <div class="mark sans"><strong>RlayHub</strong></div>
+  <h1>Blokzincir<br>Geliştiriciliği<br>Katılımcı Kitabı</h1>
+  <div class="alt">
+    Dört günlük kampın tamamı, kurulumdan Demo Day'e.<br>
+    Kampta anlatılan her şeyin yazılı hali.
+  </div>
+  <div class="kunye">
+    <strong>Nesin Matematik Köyü, Şirince</strong><br>
+    Ağustos 2026<br>
+    Eğitmen: Meriç Cintosun<br>
+    Ağ: Base Sepolia testnet (zincir kimliği 84532)
+  </div>
+</section>
+
+<section class="icindekiler">
+<h1>İçindekiler</h1>
+<ol>
+  <li>0. Başlamadan Önce: Bilgisayarını Hazırla
+    <ol>
+      <li>Neden terminal</li>
+      <li>Windows kullanıyorsan: WSL</li>
+      <li>Git ve GitHub</li>
+      <li>Node, npm, nvm</li>
+      <li>Foundry: forge, cast, anvil</li>
+      <li>Cüzdan</li>
+      <li>Editör ve eklentiler</li>
+      <li>OpenZeppelin ve kütüphaneler</li>
+      <li>İşine yarayacak diğer araçlar</li>
+      <li>Kurulum kontrol listesi</li>
+    </ol>
+  </li>
+  <li>1. Felsefe: Bu Şey Neden Var
+    <ol>
+      <li>Merkeziyetsizlik neden doğdu</li>
+      <li>Satoshi neden anonim kaldı</li>
+      <li>Kuruma değil koda güvenmek</li>
+      <li>Gereksiz blokzincir</li>
+    </ol>
+  </li>
+  <li>2. Temeller: Defter, Mühür, Mutabakat
+    <ol>
+      <li>Ortak defter fikri</li>
+      <li>Çift harcama</li>
+      <li>Mühür ve değiştirilemezlik</li>
+      <li>Cüzdan, adres, özel anahtar</li>
+      <li>Bir işlemin yolculuğu</li>
+      <li>Ücret neden var, L2 neden ucuz</li>
+    </ol>
+  </li>
+  <li>3. Akıllı Kontratlar
+    <ol>
+      <li>Otomat benzetmesi</li>
+      <li>Üç parça: hafıza, işlem, duyuru</li>
+      <li>msg.sender ve kural yazmak</li>
+      <li>Custom error, modifier, sahiplik</li>
+      <li>ERC-20 ve neden sıfırdan yazmıyoruz</li>
+      <li>Deploy ve kaynak kodu doğrulama</li>
+    </ol>
+  </li>
+  <li>4. AI ile Kod Yazmak
+    <ol>
+      <li>Prompt'un dört parçası: bağlam, rol, içerik, hedef</li>
+      <li>AI ile kod yazmanın beş kuralı</li>
+      <li>Şartname, test, kod döngüsü</li>
+      <li>AI'ın yapamadıkları</li>
+      <li>Bug'ı bulmak: yeşil test yalan söyler</li>
+    </ol>
+  </li>
+  <li>5. Güvenlik
+    <ol>
+      <li>Reentrancy: bir kasa nasıl boşaltılır</li>
+      <li>Önce kontrol et, sonra kaydet, en son gönder</li>
+      <li>Üç gerçek vaka kalıbı</li>
+      <li>Yeni başlayanın kontrol listesi</li>
+    </ol>
+  </li>
+  <li>6. Arayüz: Zinciri Ekrana Bağlamak
+    <ol>
+      <li>Okuma ve yazma farkı</li>
+      <li>wagmi ve viem</li>
+      <li>Bekleme ve hata durumu</li>
+    </ol>
+  </li>
+  <li>7. Hackathon
+    <ol>
+      <li>Üç dakikada sunum</li>
+      <li>Jüri neye bakar</li>
+      <li>En sık yapılan sekiz hata</li>
+      <li>Kampın ardından nasıl çalışılır</li>
+    </ol>
+  </li>
+  <li>8. Yazılımcı ve Geliştirici
+    <ol>
+      <li>İki farklı kavram</li>
+      <li>AI yazmayı ucuzlattığında geriye ne kalıyor</li>
+      <li>Builder olmak</li>
+    </ol>
+  </li>
+  <li>Ekler
+    <ol>
+      <li>Komut referansı</li>
+      <li>Sözlük</li>
+      <li>Kaynaklar</li>
+    </ol>
+  </li>
+</ol>
+</section>
+
+<section>
+<div class="bolum-no">Bölüm 0</div>
+<h1>Başlamadan Önce: Bilgisayarını Hazırla</h1>
+
+<p class="ozet">Kampın ilk günü bilgisayarına hiçbir şey kurmuyorsun, sadece tarayıcı yetiyor. İkinci günün öğleden sonrasından itibaren terminal açılıyor. Bu bölüm o ana kadar hazır olman gereken her şeyi anlatıyor. Kampa gelmeden kurabilirsen bir öğleden sonra kazanırsın.</p>
+
+<h2>0.1 Neden terminal</h2>
+
+<p>Blokzincir araçlarının neredeyse tamamı komut satırında çalışıyor. Bunun sebebi araçların eski olması değil. Yaptığın işin tekrarlanabilir olması gerekiyor. Bir butona tıkladığında ne olduğunu kimse göremez, ama bir komutu yazdığında o komutu başkasına gönderebilirsin, bir dosyaya kaydedebilirsin, bir sonraki sefer aynısını çalıştırabilirsin.</p>
+
+<p>Terminal korkutucu görünüyorsa şunu bil: kampta kullanacağın komut sayısı yirmiyi geçmiyor. Hepsi bu kitabın sonundaki referansta var.</p>
+
+<h2>0.2 Windows kullanıyorsan: WSL</h2>
+
+<p>Bu maddeyi atlama. Windows kullanıcılarının kampta yaşadığı sorunların çoğu buradan çıkıyor.</p>
+
+<p>Blokzincir araçlarının büyük kısmı Linux ve macOS için yazılıyor. Windows'un kendi komut satırı (cmd, PowerShell) dosya yollarını, izinleri ve satır sonlarını farklı ele alıyor. Foundry gibi araçlar Windows'ta ya hiç kurulmuyor ya da yarım çalışıyor.</p>
+
+<p>Çözüm WSL. Açılımı Windows Subsystem for Linux. Windows'un içinde çalışan gerçek bir Linux. Sanal makine değil, ayrı bilgisayar değil, aynı dosyalara erişebiliyorsun ve neredeyse hiç yavaşlama yok.</p>
+
+<h4>Kurulum</h4>
+<p>PowerShell'i yönetici olarak aç, şunu yaz:</p>
+<pre>wsl --install</pre>
+<p>Bilgisayarı yeniden başlat. Açılışta Ubuntu bir kullanıcı adı ve parola soracak. Bu parola Windows parolan değil, Linux tarafının parolası. Not al, çünkü her <code>sudo</code> komutunda soracak.</p>
+
+<p>Bundan sonra terminal derken Ubuntu terminalini kastediyoruz. PowerShell'i kapat, orada çalışma.</p>
+
+<div class="kutu">
+<div class="baslik">Sık yapılan hata</div>
+<p>Projeni Windows tarafında (<code>C:\Users\...</code>) tutup WSL'den erişmek. Çalışır ama çok yavaştır ve dosya izinleri karışır. Projeyi Linux tarafında tut. WSL terminalinde <code>cd ~</code> yazdığında gittiğin yer orası.</p>
+</div>
+
+<p>macOS veya Linux kullanıyorsan bu bölümü atla, senin terminalin zaten hazır.</p>
+
+<h2>0.3 Git ve GitHub</h2>
+
+<p>Git bir sürüm kontrol aracı. Yaptığın her değişikliğin fotoğrafını çekiyor, istediğin ana geri dönebiliyorsun. GitHub ise o fotoğrafları sakladığın ve başkalarıyla paylaştığın site. İkisi aynı şey değil. Git bilgisayarında çalışır, GitHub internette durur.</p>
+
+<h4>Kurulum</h4>
+<pre>sudo apt update
+sudo apt install git        # WSL / Ubuntu
+brew install git            # macOS
+git --version</pre>
+
+<h4>İlk ayar</h4>
+<p>Git her kaydın kim tarafından yapıldığını yazıyor. Bir kere ayarla:</p>
+<pre>git config --global user.name "Adin Soyadin"
+git config --global user.email "eposta@ornek.com"</pre>
+
+<h4>Kampta kullanacağın komutlar</h4>
+<pre>git clone &lt;adres&gt;      # bir projeyi bilgisayarina indir
+git status             # ne degistirdim
+git diff               # tam olarak neyi degistirdim
+git add .              # degisiklikleri kayda hazirla
+git commit -m "mesaj"  # kaydi al
+git push               # GitHub'a gonder
+git pull               # GitHub'daki degisiklikleri al</pre>
+
+<p>Kampta en çok işine yarayacak olan <code>git diff</code>. Üçüncü gün yapay zekaya kod yazdıracaksın ve neyi değiştirdiğini görmen gerekecek. O anda bu komut senin gözün olacak.</p>
+
+<h4>GitHub hesabı</h4>
+<p>Ücretsiz aç. SSH anahtarı kurmanı öneririm, her seferinde parola sormaz:</p>
+<pre>ssh-keygen -t ed25519 -C "eposta@ornek.com"
+cat ~/.ssh/id_ed25519.pub</pre>
+<p>Çıkan metni GitHub'da Settings, SSH and GPG keys bölümüne yapıştır. Test et:</p>
+<pre>ssh -T git@github.com</pre>
+
+<h2>0.4 Node, npm, nvm</h2>
+
+<p>Üç isim karışıyor, ayıralım.</p>
+
+<table>
+<tr><th>İsim</th><th>Nedir</th></tr>
+<tr><td>Node.js</td><td>JavaScript'i tarayıcı dışında çalıştıran program. Arayüz tarafının motoru.</td></tr>
+<tr><td>npm</td><td>Node ile birlikte gelen paket yöneticisi. Başkalarının yazdığı kütüphaneleri indirir.</td></tr>
+<tr><td>nvm</td><td>Node'un sürümlerini yöneten araç. Aynı bilgisayarda birden fazla Node sürümü tutmanı sağlar.</td></tr>
+</table>
+
+<p>Node'u doğrudan kurma, nvm ile kur. Sebebi şu: farklı projeler farklı Node sürümü istiyor ve doğrudan kurulmuş Node'u değiştirmek zahmetli.</p>
+
+<pre>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash</pre>
+<p>Terminali kapat aç. Sonra:</p>
+<pre>nvm install --lts
+nvm use --lts
+node --version    # v20.9 veya ustu olmali
+npm --version</pre>
+
+<p>Kampın arayüz projesi Node 20.9 ve üstünü istiyor. Daha eskisi varsa Next.js açılmaz.</p>
+
+<h2>0.5 Foundry: forge, cast, anvil</h2>
+
+<p>Foundry, akıllı kontrat geliştirmenin araç takımı. Üç parçası var ve üçünü de kampta kullanacaksın.</p>
+
+<table>
+<tr><th>Araç</th><th>Ne yapar</th></tr>
+<tr><td><code>forge</code></td><td>Kontratı derler, test eder, ağa yayınlar.</td></tr>
+<tr><td><code>cast</code></td><td>Zincirle konuşur. Bakiye sorar, işlem gönderir, kontrat okur.</td></tr>
+<tr><td><code>anvil</code></td><td>Kendi bilgisayarında sahte bir blokzincir başlatır. İnternet gerekmez.</td></tr>
+</table>
+
+<h4>Kurulum</h4>
+<pre>curl -L https://foundry.paradigm.xyz | bash
+foundryup
+forge --version</pre>
+
+<p><code>forge: command not found</code> alırsan Foundry kurulmuş ama terminal onu bulamıyor. Şunu ekle:</p>
+<pre>export PATH="$HOME/.foundry/bin:$PATH"</pre>
+<p>Kalıcı olması için aynı satırı <code>~/.bashrc</code> veya <code>~/.zshrc</code> dosyasının sonuna yapıştır, terminali kapat aç.</p>
+
+<div class="kutu">
+<div class="baslik">İnternetsiz kalırsan</div>
+<p>Foundry ilk derlemede Solidity derleyicisini internetten indiriyor. İndirdiği yer macOS'te <code>~/Library/Application Support/svm/</code>, Linux'ta <code>~/.svm/</code>. Bağlantı kesikken taze bir bilgisayarda derleme yapamazsın. Kampa gelmeden bir kere <code>forge build</code> çalıştır ki derleyici inmiş olsun.</p>
+</div>
+
+<h2>0.6 Cüzdan</h2>
+
+<p>Cüzdan aslında para tutmuyor. Para zincirde duruyor. Cüzdanın tuttuğu şey özel anahtar, yani o parayı hareket ettirme yetkisi.</p>
+
+<p>Kampta MetaMask kullanacağız. Tarayıcı eklentisi olarak kur, kurulum sırasında sana on iki kelimelik bir kurtarma cümlesi verecek.</p>
+
+<div class="kutu">
+<div class="baslik">Bu üç kural pazarlığa açık değil</div>
+<ol>
+<li>Kurtarma cümlesini kağıda yaz. Ekran görüntüsü alma, buluta yükleme, kendine mesaj atma.</li>
+<li>Kimse senden kurtarma cümleni istemez. İsteyen dolandırıcıdır. İstisnası yok.</li>
+<li>Kampta kullandığın cüzdanda gerçek para tutma. Testnet için ayrı bir cüzdan aç.</li>
+</ol>
+</div>
+
+<h4>Base Sepolia ağını ekle</h4>
+<p>MetaMask varsayılan olarak sadece ana ağı gösterir. Test ağını elle eklemen gerekir:</p>
+<table>
+<tr><th>Alan</th><th>Değer</th></tr>
+<tr><td>Ağ adı</td><td>Base Sepolia</td></tr>
+<tr><td>RPC adresi</td><td>https://sepolia.base.org</td></tr>
+<tr><td>Zincir kimliği</td><td>84532</td></tr>
+<tr><td>Sembol</td><td>ETH</td></tr>
+<tr><td>Explorer</td><td>https://sepolia.basescan.org</td></tr>
+</table>
+
+<h4>Test parası</h4>
+<p>Testnet parasının değeri yok ama işlem yapmak için gerekiyor. Musluk denen sitelerden alınıyor. Uyarı: muslukların çoğu senden ana ağda gerçek para bulundurmanı istiyor. İstemeyen tek yer Coinbase Developer Platform musluğu, ücretsiz hesap yetiyor.</p>
+
+<p>Rakamlar konusunda içini rahatlatalım. Base bir L2 olduğu için işlemler çok ucuz. Bu kampın tamamı, yani iki kontrat yayınlama artı yirmi mesaj artı yirmi transfer, tek bir öğrenci için yaklaşık 0.0000146 ETH tutuyor. Musluktan tek seferde aldığın miktar bunun birkaç katı.</p>
+
+<h2>0.7 Editör ve eklentiler</h2>
+
+<p>VS Code kur. WSL kullanıyorsan Remote WSL eklentisini de kur, yoksa Windows tarafındaki dosyaları düzenlemeye çalışırsın.</p>
+
+<p>İşine yarayacak eklentiler:</p>
+<ul>
+<li><strong>Solidity</strong> (Juan Blanco veya Nomic Foundation). Renklendirme ve hata gösterimi.</li>
+<li><strong>Remote WSL</strong>. Sadece Windows için, ama şart.</li>
+<li><strong>GitLens</strong>. Bir satırı kimin ne zaman değiştirdiğini gösterir.</li>
+<li><strong>Even Better TOML</strong>. Foundry ayar dosyaları için.</li>
+</ul>
+
+<p>Kampın ilk iki oturumunda VS Code kullanmıyoruz. Remix denen tarayıcı editörüyle çalışıyoruz, hiçbir kurulum istemiyor. VS Code ikinci günün öğleden sonrasında giriyor.</p>
+
+<h2>0.8 OpenZeppelin ve kütüphaneler</h2>
+
+<p>OpenZeppelin, akıllı kontratların standart kütüphanesi. Token, sahiplik, erişim kontrolü gibi herkesin ihtiyaç duyduğu şeyler orada yazılı ve defalarca denetlenmiş.</p>
+
+<p>Neden kendin yazmıyorsun: ERC-20 standardını sıfırdan yazmak yüz elli satır sürer ve o yüz elli satırın içinde en az bir hata olur. Kampın üçüncü gününde tam olarak bunun örneğini göreceksin. Yapay zekanın yazdığı, derlenen, testleri geçen ve buna rağmen bir cüzdanı boşaltabilecek bir token kontratını inceleyeceğiz.</p>
+
+<p>Denetlenmiş kütüphane kullanmak tembellik değil, güvenlik kararıdır. Bu cümleyi kampta beş kere duyacaksın.</p>
+
+<h4>Kurulum</h4>
+<p>Foundry projelerinde kütüphaneler <code>lib/</code> klasörüne iniyor:</p>
+<pre>forge install OpenZeppelin/openzeppelin-contracts@v5.7.0
+forge install foundry-rs/forge-std@v1.9.7</pre>
+
+<p>Sürümü yazmayı unutma. Yazmazsan en son sürüm iner ve kütüphane bir hafta sonra değiştiğinde kodun derlenmez.</p>
+
+<h4>remappings.txt</h4>
+<p>Solidity import satırlarının nereye baktığını bu dosya söylüyor. Yoksa import çözülmez:</p>
+<pre>forge-std/=lib/forge-std/src/
+openzeppelin-contracts/=lib/openzeppelin-contracts/contracts/</pre>
+
+<h2>0.9 İşine yarayacak diğer araçlar</h2>
+
+<table>
+<tr><th>Araç</th><th>Ne için</th></tr>
+<tr><td>Remix (remix.ethereum.org)</td><td>Tarayıcıda Solidity yazmak. Kurulum yok. İlk kontratını burada yazacaksın.</td></tr>
+<tr><td>Basescan</td><td>Zincirdeki her şeyi okumak. İşlem, kontrat, bakiye.</td></tr>
+<tr><td>wagmi ve viem</td><td>Arayüzü zincire bağlayan JavaScript kütüphaneleri. Dördüncü gün.</td></tr>
+<tr><td>Slither</td><td>Kontratı otomatik tarayıp bilinen hata kalıplarını bulur. Üçüncü gün deneyeceğiz.</td></tr>
+<tr><td>Etherscan ABI</td><td>Doğrulanmış bir kontratın arayüz tanımını almak için.</td></tr>
+</table>
+
+<p>Bunların hepsini şimdi kurmana gerek yok. Remix ve Basescan tarayıcıda çalışıyor, wagmi arayüz projesiyle birlikte geliyor.</p>
+
+<h2>0.10 Kurulum kontrol listesi</h2>
+
+<p>Kampın ikinci gününün öğleden sonrasına kadar bunların hepsi tamam olmalı:</p>
+
+<ul class="kontrol">
+<li>WSL kurulu ve Ubuntu terminali açılıyor (sadece Windows)</li>
+<li><code>git --version</code> bir sayı döndürüyor</li>
+<li>GitHub hesabı var, SSH anahtarı çalışıyor</li>
+<li><code>node --version</code> v20.9 veya üstü</li>
+<li><code>forge --version</code> bir sayı döndürüyor</li>
+<li>Bir kere <code>forge build</code> çalıştırıldı, derleyici indi</li>
+<li>MetaMask kurulu, kurtarma cümlesi kağıtta</li>
+<li>Base Sepolia ağı MetaMask'e eklendi</li>
+<li>Cüzdanda test parası var</li>
+<li>VS Code kurulu, Solidity eklentisi var</li>
+</ul>
+</section>
+
+<section>
+<div class="bolum-no">Bölüm 1</div>
+<h1>Felsefe: Bu Şey Neden Var</h1>
+
+<p class="ozet">Teknik kısma geçmeden önce bu sorunun cevabını bilmen gerekiyor. Çünkü blokzincir çoğu problemin çözümü değil ve bunu bilmeyen geliştirici, gerekmediği yerde kullanıp hem kendini hem kullanıcısını yorar.</p>
+
+<h2>1.1 Merkeziyetsizlik neden doğdu</h2>
+
+<p>Basit bir soruyla başlayalım. Arkadaşına yüz lira borç verdin. Vermediğini söylerse bunu nasıl kanıtlarsın?</p>
+
+<p>Verdiğin bütün cevapların ortak noktası var. Tanık, kağıt, mesaj kaydı, banka dekontu. Hepsinde bir üçüncü tarafa güveniyorsun. Tanığa, kağıdı saklayan kişiye, mesajı tutan şirkete, bankaya.</p>
+
+<p>Hayatımız defter tutuculara emanet. Banka kimin ne kadar parası olduğunu biliyor. Tapu neyin kime ait olduğunu kaydediyor. Sosyal ağlar takipçini ve hesabını kendi sunucusunda tutuyor.</p>
+
+<p>Bu sistem kötü değil. Bunu net söylemek lazım. Aracı olduğu için karşı tarafın dürüst olup olmadığını bilmek zorunda değilsin. Yüzyıllardır işliyor ve çoğu durumda gayet iyi işliyor.</p>
+
+<p>Sorun aracının kendisi sorun olduğunda çıkıyor. Üç şekilde:</p>
+
+<ol>
+<li><strong>Tek nokta.</strong> Defteri tutan çökerse, hacklenirse veya kapanırsa herkes etkilenir. Yedeği olsa bile kararı veren hala tek yer.</li>
+<li><strong>İzin.</strong> Hesabın dondurulabilir, ödemen reddedilebilir, ülkene göre erişimin kesilebilir. Paran sende ama kullanma yetkisi başkasında.</li>
+<li><strong>Görünmezlik.</strong> Defterin içini göremezsin. Doğru tutulduğunu varsaymak zorundasın.</li>
+</ol>
+
+<p>Merkeziyetsizlik bu üç sorunun cevabı olarak doğdu. Defteri tek bir kurum değil, herkes aynı anda tutsun fikri.</p>
+
+<p>Ama bu fikri uygulamak için üç zor soruyu çözmen gerekiyor: Herkes kendi defterini tutuyorsa kim haklı? Biri defterine sahte bir satır yazarsa ne olur? Aynı parayı iki kişiye aynı anda gönderirsen ne olur?</p>
+
+<p>Bu kitabın ikinci bölümü tam olarak bu üç sorunun cevabı.</p>
+
+<h4>Dağıtık ile merkeziyetsiz aynı şey değil</h4>
+
+<p>Bu ikisi sık karıştırılıyor, ayrımı bil.</p>
+
+<p><strong>Dağıtık</strong> sorusu şu: kaç kopya var? Defterin kopyası birçok makinede duruyorsa dağıtıktır. Bu teknik bir gerçek.</p>
+
+<p><strong>Merkeziyetsiz</strong> sorusu şu: kim karar veriyor? Kuralı değiştirebilecek tek bir taraf yoksa merkeziyetsizdir. Bu bir yetki gerçeği.</p>
+
+<p>Dağıtık olup merkeziyetsiz olmayan sistem gayet mümkün. Beş banka ortak bir defter kurar, elli sunucuda elli kopya tutulur. Dağıtık, evet. Ama beşi bir araya gelip kuralı değiştirebiliyor, kaydı silebiliyorsa merkeziyetsiz değil.</p>
+
+<p>Tersi olmaz. Dağıtmadan merkeziyetsiz olamazsın. Yani dağıtıklık gerekli ama yeterli değil.</p>
+
+<h2>1.2 Satoshi neden anonim kaldı</h2>
+
+<p>Bitcoin'i yazan kişi ya da grup 2008'de dokuz sayfalık bir makale yayınladı, birkaç yıl geliştirmeye devam etti, sonra ortadan kayboldu. Kim olduğu hala bilinmiyor.</p>
+
+<p>Bu bir tarz meselesi değil. Sistemin çalışması için gerekliydi. Üç sebep:</p>
+
+<h4>Kurucu varsa baskı noktası vardır</h4>
+<p>Bir para sistemi düşün. Kurucusu belli, adresi belli. O kişiye baskı yapabilirsin. Tutuklayabilirsin, dava açabilirsin, tehdit edebilirsin, satın alabilirsin. Sistemin merkeziyetsiz olduğunu iddia edersin ama kurucusunun kapısı bir merkezdir.</p>
+
+<p>Satoshi'nin kim olduğu bilinmediği için kapı yok. Bitcoin'i durdurmak isteyen birinin gidebileceği bir adres yok.</p>
+
+<h4>Kurucu varsa otorite vardır</h4>
+<p>Bir tartışma çıktığında herkes kurucuya bakar. "Satoshi ne diyor?" sorusu sorulduğu anda merkeziyetsizlik biter. Karar veren bir kişi olmuş olur.</p>
+
+<p>Satoshi çekildiği için topluluk kendi kararını vermek zorunda kaldı. Bugün Bitcoin'de bir değişiklik yapılacaksa tartışılıyor, oylanıyor, madenciler ve düğümler kabul ediyor ya da etmiyor. Yavaş ve dağınık bir süreç, ama tam da bu yüzden kimsenin tek başına değiştiremeyeceği bir sistem.</p>
+
+<h4>Fikir kişiden büyük olsun diye</h4>
+<p>Bir teknoloji kurucusuyla anılıyorsa kaderi de ona bağlanır. Kurucu itibarını kaybederse teknoloji de kaybeder.</p>
+
+<p>Satoshi ortada olmadığı için Bitcoin bir kişinin hikayesi değil, bir protokolün hikayesi oldu.</p>
+
+<div class="kutu">
+<div class="baslik">Buradan çıkan ders</div>
+<p>Merkeziyetsiz bir şey inşa ediyorsan kendine sor: bu sistem ben yarın kaybolsam çalışmaya devam eder mi? Cevap hayırsa merkeziyetsiz değil, sadece dağıtık.</p>
+</div>
+
+<h2>1.3 Kuruma değil koda güvenmek</h2>
+
+<p>Burada bir yanlış anlama var, düzeltelim. Blokzincir "güven gerektirmez" değil. Güvenin yerini değiştirir.</p>
+
+<p>Klasik sistemde şuna güveniyorsun: bankanın niyetine, çalışanlarının dürüstlüğüne, yöneticisinin bugün kötü bir karar almayacağına. Yani <strong>insanlara ve kurumlara</strong> güveniyorsun.</p>
+
+<p>Blokzincirde şuna güveniyorsun: kodun yazdığı gibi çalışacağına, matematiğin doğru olduğuna, çoğunluğun kuralı değiştiremeyeceğine. Yani <strong>doğrulanabilir bir mekanizmaya</strong> güveniyorsun.</p>
+
+<p>Farkı şurada: kurumun niyetini göremezsin, kodun içini görebilirsin. Kontrat doğrulanmışsa herkes okuyabilir. Ne söz verdiğini satır satır kontrol edebilirsin.</p>
+
+<h4>Ama bu takas bedava değil</h4>
+
+<p>Koda güvenmenin bedeli şu: kod yanlışsa geri dönüş yok.</p>
+
+<p>Bankada yanlış transfer yaparsan arayıp iptal ettirebilirsin. Blokzincirde yanlış adrese gönderdiysen para gitti. Kontratında bir hata varsa o hata da kalıcı, çünkü kontrat yayınlandıktan sonra kodu değiştirilemiyor.</p>
+
+<p>Yani "koda güveniyoruz" cümlesi aynı zamanda "kodu yazan kişinin sorumluluğu çok büyük" demek. Kampın üçüncü günü tam olarak bunun üstüne kurulu.</p>
+
+<h4>Kod kanunsa, kanunu kim yazıyor</h4>
+
+<p>Kampta çok duyacağın "kod kanundur" sözü kulağa hoş geliyor ama eksik. Kanunu birisi yazıyor ve o birisi hata yapabiliyor.</p>
+
+<p>Gerçekte olan şu: kod, yazıldığı andaki niyetin donmuş halidir. Niyetin yanlışsa kod da yanlış olur ve kimse itiraz edemez.</p>
+
+<p>Bu yüzden bu işte test yazmak bir alışkanlık değil, zorunluluk.</p>
+
+<h2>1.4 Gereksiz blokzincir</h2>
+
+<p>Bu başlığı kimse anlatmıyor, ben anlatıyorum. Çünkü bir teknolojinin nerede işe yaramadığını bilmiyorsan onu doğru yerde kullanamazsın.</p>
+
+<h4>Blokzincirin dört zayıflığı</h4>
+
+<ol>
+<li><strong>Yavaştır.</strong> Sıradan bir veritabanı binlerce kat hızlıdır. Blokzincir saniyede birkaç yüz işlem yaparken bir PostgreSQL sunucusu on binlerce yapar.</li>
+<li><strong>Pahalıdır.</strong> Yazdığın her satırın bir bedeli var. Veritabanına yazmak bedavaya yakınken zincire yazmak para istiyor.</li>
+<li><strong>Gizli değildir.</strong> Yazdığın her şey herkese açık. Kontrata şifre koyamazsın, gizli sayı saklayamazsın. Yeni başlayanların en pahalı hatası budur.</li>
+<li><strong>Değiştirilemez.</strong> Bu genelde avantaj sayılır ama bir yükümlülüktür de. Yanlış veri yazdıysan silemezsin.</li>
+</ol>
+
+<h4>Şu soruyu sor</h4>
+
+<p>Bir proje fikri geldiğinde üç soruyu sırayla sor. Üçüne birden evet diyemiyorsan blokzincire ihtiyacın yok.</p>
+
+<ol>
+<li>Birden fazla taraf var mı ve bu taraflar birbirine güvenmiyor mu?</li>
+<li>Aralarında hakemlik yapacak ortak bir kurum yok mu, ya da varsa ona güvenmek istemiyorlar mı?</li>
+<li>Kaydın değiştirilemez olması gerçekten gerekli mi?</li>
+</ol>
+
+<h4>Örnekler</h4>
+
+<table>
+<tr><th>Fikir</th><th>Blokzincir gerekli mi</th><th>Neden</th></tr>
+<tr><td>Okul yoklama sistemi</td><td>Hayır</td><td>Tek taraf var, okul. Kimse okula karşı kanıt üretmiyor. Excel yeter.</td></tr>
+<tr><td>Şirket içi belge arşivi</td><td>Hayır</td><td>Güvenmediğin taraf yok. Yedekli bir veritabanı daha hızlı ve ucuz.</td></tr>
+<tr><td>Sadakat puanı uygulaması</td><td>Genelde hayır</td><td>Puanı veren şirket zaten tek otorite. Zincire koymak sadece maliyet ekler.</td></tr>
+<tr><td>Sınır ötesi ödeme</td><td>Evet</td><td>Taraflar farklı ülkede, ortak bir banka yok, aracı yavaş ve pahalı.</td></tr>
+<tr><td>Ortak kasa yönetimi</td><td>Evet</td><td>Beş kişi para koyuyor, hiçbiri diğerine tam güvenmiyor, kuralın koda yazılması işi çözüyor.</td></tr>
+<tr><td>Bir şeyin belli bir anda var olduğunu ispat</td><td>Evet</td><td>Zaman damgası kimsenin değiştiremeyeceği bir yerde duruyor.</td></tr>
+</table>
+
+<div class="kutu">
+<div class="baslik">Hackathon uyarısı</div>
+<p>Jürilerin en çok gördüğü ve en çok elediği proje türü, aslında bir veritabanının çözdüğü işi blokzincire taşıyan projedir. Fikrini sunarken "neden blokzincir" sorusunun cevabı ilk otuz saniyede net olmalı. Cevabın yoksa fikri değiştir.</p>
+</div>
+</section>
+
+<section>
+<div class="bolum-no">Bölüm 2</div>
+<h1>Temeller: Defter, Mühür, Mutabakat</h1>
+
+<p class="ozet">Bu bölüm kampın birinci gününün yazılı hali. Köy Defteri Oyunu'nda elle keşfettiğin şeylerin isimleri burada.</p>
+
+<h2>2.1 Ortak defter fikri</h2>
+
+<p>Blokzincir dediğimiz şey teknik olarak bir defterdir. İçinde kimin kime ne gönderdiği yazar. Tek farkı, bu defterin binlerce kopyası var ve hepsi aynı anda güncelleniyor.</p>
+
+<p>Bir işlem yapmak şu demek: yüksek sesle ilan etmek. "Ali'den Ayşe'ye 3 altın." Herkes duyar, herkes kendi kopyasına yazar.</p>
+
+<p>Bu basit kuralın getirdiği ilk sonuç şu: duymayan yazamaz. İşlemin geçerli olması için ağın büyük kısmının onu duymuş olması gerekiyor. Gizlice işlem yapamazsın.</p>
+
+<h4>Sahte satır neden tutmuyor</h4>
+
+<p>Diyelim biri kendi defterine kimsenin söylemediği bir satır ekledi. Kendine on altın gelmiş gibi yazdı.</p>
+
+<p>Defterleri karşılaştırdığında o satır sadece bir kopyada var, diğer on dördünde yok. Üstelik satırda adı geçen gönderici "ben öyle bir şey demedim" diyor.</p>
+
+<p>Çoğunluk kazanır. Buna <strong>mutabakat</strong> denir. Bir kişi on dört kişiyi yenemez.</p>
+
+<p>Peki çoğunluğu ele geçirmek mümkün mü? Teorik olarak evet. Pratikte pahalı. Sistemi ayakta tutan şey de bu: yalan söylemek sana ödediğinden fazlasına mal oluyor.</p>
+
+<h2>2.2 Çift harcama</h2>
+
+<p>Dijital paranın en eski problemi bu. Bir dosyayı kopyalamak bedava. O zaman parayı da kopyalayamaz mısın?</p>
+
+<p>Somut hali şöyle: on altının var. Sınıfın sol yarısına "Ayşe'ye on gönderdim" diyorsun, sağ yarısına aynı anda "Mehmet'e on gönderdim" diyorsun.</p>
+
+<p>Sol yarı bir şey yazıyor, sağ yarı başka bir şey. İki farklı doğru ortaya çıkıyor. Ama ikisi birden olamaz, çünkü sadece on altının var.</p>
+
+<p>Çözüm sıradır. Hangisi önce yazıldıysa o geçerli, diğeri düşer. Ve bu sıraya tek bir kişi karar veremez, ağ karar verir.</p>
+
+<p>Bitcoin'in çözdüğü asıl problem buydu. Para göndermeyi zaten biliyorduk, aynı parayı iki kere gönderemediğinden emin olmayı bilmiyorduk.</p>
+
+<h2>2.3 Mühür ve değiştirilemezlik</h2>
+
+<p>Şimdiki soru şu: bugün yazılan doğru, peki ya biri yarın geçmişe dönüp eski bir sayfayı değiştirirse?</p>
+
+<p>Çözüm zincirin adını aldığı yer. Her sayfa bir önceki sayfanın mührünü taşıyor.</p>
+
+<p>Mühür, sayfanın içeriğinden hesaplanan bir sayı. Kampta elle yaptığımız basit hali şöyleydi:</p>
+
+<pre>muhur = sayfadaki altin miktarlarinin toplami + onceki sayfanin muhru</pre>
+
+<p>Örnek:</p>
+
+<pre>Sayfa 1
+  Ali    -> Ayse    : 3
+  Mehmet -> Ali     : 5
+  Ayse   -> Can     : 2
+  onceki muhur: 0
+  muhur = 3 + 5 + 2 + 0 = 10
+
+Sayfa 2
+  Can    -> Ali     : 4
+  Ali    -> Mehmet  : 6
+  Can    -> Ayse    : 1
+  onceki muhur: 10
+  muhur = 4 + 6 + 1 + 10 = 21</pre>
+
+<p>Şimdi biri sayfa 1'deki 3'ü 8 yapsın. Mührü yeniden hesapladığında 15 çıkıyor. Ama sayfa 2'de "önceki mühür: 10" yazıyor. Tutmuyor.</p>
+
+<p>Yakalandı. Ve düzeltmek için sayfa 2'yi, sonra 3'ü, sonra hepsini değiştirmesi lazım. Hem de binlerce kopyada aynı anda.</p>
+
+<p>Gerçek sistemlerde bu mühre <strong>hash</strong> deniyor ve toplama değil kriptografik bir fonksiyon kullanılıyor. Fikir aynı: içerik değişirse mühür değişir, mühür değişirse zincir kopar.</p>
+
+<h2>2.4 Cüzdan, adres, özel anahtar</h2>
+
+<p>Üç kavram, sık karışıyor.</p>
+
+<table>
+<tr><th>Kavram</th><th>Nedir</th><th>Benzetme</th></tr>
+<tr><td>Özel anahtar</td><td>Rastgele üretilmiş çok büyük bir sayı. Parayı hareket ettirme yetkisi.</td><td>İmzan</td></tr>
+<tr><td>Adres</td><td>Özel anahtardan matematiksel olarak türetilir. Herkese verebilirsin.</td><td>IBAN'ın</td></tr>
+<tr><td>Cüzdan</td><td>Özel anahtarı saklayan ve senin adına imzalayan program.</td><td>Cüzdanın</td></tr>
+</table>
+
+<p>Kritik nokta: adresten özel anahtara geri gidilemiyor. Tek yönlü. Bu yüzden adresini paylaşmak güvenli.</p>
+
+<p>İkinci kritik nokta: özel anahtarını kaybedersen paranı kaybedersin. "Şifremi unuttum" diyebileceğin bir yer yok. Sistemin tamamı bunun üstüne kurulu, çünkü şifreni sıfırlayabilecek bir merkez olsaydı o merkez paranı da alabilirdi.</p>
+
+<h4>Kurtarma cümlesi</h4>
+<p>On iki kelime, özel anahtarın insan okuyabilir hali. Bir cüzdanı başka bir cihazda geri yüklemeye yarıyor.</p>
+<p>Bu cümleyi bilen kişi paranın sahibidir. Başka doğrulama yok. Bu yüzden hiç kimseyle paylaşılmaz.</p>
+
+<h2>2.5 Bir işlemin yolculuğu</h2>
+
+<p>Gönder tuşuna bastığında ne oluyor. Beş adım.</p>
+
+<h4>1. İmzala</h4>
+<p>Cüzdanın işlemi özel anahtarınla imzalıyor. İmza, "bunu gerçekten ben istedim" demenin matematiksel yolu. Kimse taklit edemiyor ama herkes doğrulayabiliyor.</p>
+<p>Dikkat: imzalarken özel anahtarın bilgisayarından çıkmıyor. İmza çıkıyor, anahtar değil.</p>
+
+<h4>2. Ağa duyur</h4>
+<p>İmzalı işlem binlerce düğüme aynı anda gönderiliyor.</p>
+
+<h4>3. Bekleme havuzu</h4>
+<p>İşlem hemen deftere yazılmıyor. Önce bir bekleme havuzuna giriyor. İngilizcesi mempool.</p>
+<p>Havuz kalabalıksa daha çok ödeyen önce geçiyor. Kargodaki ekspres seçeneği gibi.</p>
+
+<h4>4. Bloğa gir</h4>
+<p>Bir düğüm havuzdan işlemleri toplayıp bir blok oluşturuyor ve zincire ekliyor. İşlemin ancak burada gerçekleşmiş sayılıyor.</p>
+
+<h4>5. Onaylandı</h4>
+<p>Blok zincire eklendikten sonra üstüne yeni bloklar geliyor. Her yeni blok işlemini biraz daha kalıcı yapıyor.</p>
+
+<div class="kutu">
+<div class="baslik">Geri alma tuşu yok</div>
+<p>Onaylanmış bir işlem iptal edilemez. Yanlış adrese gönderdiysen para gitti. Karşı taraf iyi niyetle geri göndermezse yapabileceğin bir şey yok.</p>
+<p>Bu yüzden büyük transferlerden önce küçük bir test transferi yapmak yaygın bir alışkanlıktır.</p>
+</div>
+
+<h2>2.6 Ücret neden var, L2 neden ucuz</h2>
+
+<p>Her bloğa sınırlı sayıda işlem sığıyor. Yer kıt olduğu için fiyatı var. Kalabalık saatte pahalı, sakin saatte ucuz.</p>
+
+<p>Fiyatı kimse belirlemiyor, talep belirliyor. Sen sadece "acelem var mı" kararını veriyorsun.</p>
+
+<h4>L2 nedir</h4>
+
+<p>Ana ağda her işlem tek tek yazılıyor. Yer kıt, ücret yüksek.</p>
+
+<p>L2 dediğimiz katman şunu yapıyor: binlerce işlemi kendi üstünde topluyor, hepsini tek bir zarfa koyuyor, zarfı ana ağa gönderiyor. Ana ağ tek bir işlem görüyor, ücreti içindekiler bölüşüyor.</p>
+
+<p>Taksiyle gitmek yerine servis dolmuşuyla gitmek gibi. Kampta Base kullanıyoruz ve Base bir L2.</p>
+
+<h4>Rakamla görelim</h4>
+<p>Base Sepolia'da bu kampın tamamı, bir öğrenci için:</p>
+<pre>2 kontrat yayinlama + 10 mesaj yazma + 10 transfer
+= yaklasik 2.400.000 gaz
+= 0,0000146 ETH</pre>
+<p>Ana ağda aynı iş yüzlerce kat pahalıya gelirdi.</p>
+</section>
+
+<section>
+<div class="bolum-no">Bölüm 3</div>
+<h1>Akıllı Kontratlar</h1>
+
+<p class="ozet">Kampın ikinci günü. Buraya kadar defteri okuduk, şimdi deftere kural yazıyoruz.</p>
+
+<h2>3.1 Otomat benzetmesi</h2>
+
+<p>Otomata parayı atarsın, ürün düşer. Satıcıya güvenmene gerek yok. Pazarlık yok, "yarın gel" yok, keyfine göre fiyat değiştirmek yok. Makine kuralı neyse onu yapar.</p>
+
+<p>Akıllı kontrat bu. Kuralı önceden yazarsın, sonra kimse fikrini değiştiremez. Sen bile.</p>
+
+<h4>Ne değil</h4>
+<ul>
+<li><strong>Hukuki sözleşme değil.</strong> Mahkemeye gitmez, avukat okumaz. Sadece kod çalışır.</li>
+<li><strong>Yapay zeka değil.</strong> "Akıllı" ismi yanıltıcı. Düşünmüyor, sadece yazdığını yapıyor.</li>
+<li><strong>Sihir değil.</strong> Sen ne yazdıysan onu yapar. Yanlış yazdıysan yanlışı yapar.</li>
+</ul>
+
+<h2>3.2 Üç parça: hafıza, işlem, duyuru</h2>
+
+<p>Her kontrat üç şeyden oluşuyor.</p>
+
+<table>
+<tr><th>Parça</th><th>Solidity karşılığı</th><th>Ne işe yarar</th></tr>
+<tr><td>Hafıza</td><td>state variable</td><td>Kontratın hatırladığı şeyler. Kim ne yazdı, kimin ne kadarı var.</td></tr>
+<tr><td>İşlem</td><td>function</td><td>Dışarıdan çağrılabilen fonksiyonlar. Hafızayı değiştirir.</td></tr>
+<tr><td>Duyuru</td><td>event</td><td>"Şu oldu" diye ağa bırakılan iz. Arayüz bunu okuyor.</td></tr>
+</table>
+
+<p>En basit hali:</p>
+
+<pre>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.28;
+
+contract SirinceDefteri {
+    string public lastMessage;            // HAFIZA
+
+    event MessageWritten(address author, string message);   // DUYURU
+
+    function write(string calldata message) external {      // ISLEM
+        lastMessage = message;
+        emit MessageWritten(msg.sender, message);
+    }
+}</pre>
+
+<p>İlk iki satır her Solidity dosyasında olur. Birincisi lisans, ikincisi hangi derleyici sürümüyle çalışacağı.</p>
+
+<h4>public ne demek</h4>
+<p>Bir değişkeni <code>public</code> yaptığında Solidity otomatik olarak onu okumaya yarayan bir fonksiyon üretiyor. Yani <code>lastMessage</code> yazınca bedava bir okuma fonksiyonu kazanıyorsun.</p>
+
+<h4>Okumak bedava, yazmak ücretli</h4>
+<p>Hafızayı okumak zinciri değiştirmediği için para istemiyor. Hafızayı değiştiren her işlem ücretli. Bu ayrımı dördüncü günde arayüzde yeniden göreceksin.</p>
+
+<h2>3.3 msg.sender ve kural yazmak</h2>
+
+<p><code>msg.sender</code>, bu fonksiyonu şu an kim çağırdıysa onun adresi. Sabit değil, her çağrıda değişir.</p>
+
+<p>Kural yazmak şu demek: <code>msg.sender</code>'a bakıp işleme izin vermek ya da vermemek.</p>
+
+<pre>if (msg.sender != owner) revert NotOwner();</pre>
+
+<p>"Çağıran sahip değilse işlemi iptal et." Kod kanundur dediğimiz şey tam olarak bu satır.</p>
+
+<p><code>revert</code> işlemi tamamen geri alıyor. Yarım kalmış bir değişiklik olmuyor. Ya hepsi olur ya hiçbiri.</p>
+
+<h2>3.4 Custom error, modifier, sahiplik</h2>
+
+<h4>Sahiplik</h4>
+<p>Kontratı kim yayınladıysa sahibi odur. Bunu constructor'da kaydediyoruz. Constructor sadece bir kere, yayınlama anında çalışan fonksiyon.</p>
+
+<pre>address public immutable owner;
+
+constructor() {
+    owner = msg.sender;
+}</pre>
+
+<p><code>immutable</code>, bir kere yazılır bir daha değişmez demek. Sahip zaten değişmeyecekse bunu koda söylemek hem daha ucuz hem daha güvenli.</p>
+
+<h4>Custom error</h4>
+<p>Eski Solidity kodlarında <code>require(kosul, "hata mesaji")</code> görürsün. Bunun yerine custom error kullan:</p>
+
+<pre>error NotOwner();
+error EmptyMessage();
+
+function write(string calldata message) external {
+    if (bytes(message).length == 0) revert EmptyMessage();
+    ...
+}</pre>
+
+<p>İki sebebi var. Metin mesajı zincire yazılıyor ve yer kaplıyor, yani para. İkincisi, hata bir tip olduğu için testte tam olarak hangi hatanın atıldığını kontrol edebiliyorsun.</p>
+
+<h4>Modifier</h4>
+<p>Aynı kontrolü iki fonksiyona yazman gerekseydi kopyalar mıydın? Kopyalama. Modifier, tekrar eden kuralı bir kere yazıp her fonksiyona takmaya yarıyor.</p>
+
+<pre>modifier onlyOwner() {
+    if (msg.sender != owner) revert NotOwner();
+    _;
+}
+
+function clear() external onlyOwner {
+    lastMessage = "";
+}</pre>
+
+<p>Alt çizgi, fonksiyonun asıl gövdesinin çalışacağı yeri gösteriyor. Önce kontrol, sonra gövde.</p>
+
+<h2>3.5 ERC-20 ve neden sıfırdan yazmıyoruz</h2>
+
+<p>ERC-20, token'ların uyduğu standart. Hangi fonksiyonların olacağını ve nasıl davranacağını tarif ediyor. Cüzdanlar ve borsalar bu standarda göre çalıştığı için token'ın standarda uyarsa her yerde görünüyor.</p>
+
+<p>Standardı sıfırdan yazmak yaklaşık yüz elli satır sürer ve içinde en az bir hata olur. Onun yerine OpenZeppelin'den miras alıyoruz.</p>
+
+<pre>import {ERC20} from "openzeppelin-contracts/token/ERC20/ERC20.sol";
+import {Ownable} from "openzeppelin-contracts/access/Ownable.sol";
+
+contract SirinceToken is ERC20, Ownable {
+    uint256 public immutable maxSupply;
+
+    error CapExceeded(uint256 requested, uint256 remaining);
+
+    constructor(string memory name_, string memory symbol_, uint256 maxSupply_)
+        ERC20(name_, symbol_)
+        Ownable(msg.sender)
+    {
+        maxSupply = maxSupply_;
+    }
+
+    function mint(address to, uint256 amount) external onlyOwner {
+        uint256 remaining = maxSupply - totalSupply();
+        if (amount > remaining) revert CapExceeded(amount, remaining);
+        _mint(to, amount);
+    }
+}</pre>
+
+<p>Otuz satır. Transfer, bakiye, onay, hepsi mirastan geliyor. Sen sadece kendi kuralını ekliyorsun: arz tavanı ve kimin basabileceği.</p>
+
+<h4>Ondalık meselesi</h4>
+<p>Solidity'de ondalıklı sayı yok. Token'lar bunu 18 basamak kaydırarak çözüyor. Yani bir token aslında 1.000.000.000.000.000.000 birim. Kodda <code>1e18</code> yazdığında bir token demiş oluyorsun.</p>
+
+<h2>3.6 Deploy ve kaynak kodu doğrulama</h2>
+
+<p>Deploy, kontratı zincire yazma işlemi. Bu andan sonra kod kilitleniyor.</p>
+
+<h4>Remix'ten</h4>
+<p>Environment olarak "Injected Provider" seç, cüzdanın Base Sepolia'da olsun, Deploy'a bas. Cüzdan onay isteyecek ve ücreti gösterecek.</p>
+
+<h4>Terminalden</h4>
+<pre>cd contracts
+cp ../.env.example .env      # PRIVATE_KEY satirini doldur
+source .env
+forge script script/Deploy.s.sol --rpc-url base_sepolia --broadcast --private-key $PRIVATE_KEY</pre>
+
+<p><code>--broadcast</code> yazmadan çalıştırırsan sadece simülasyon yapar, tahmini ücreti söyler, hiçbir şey harcamaz. Önce böyle dene.</p>
+
+<div class="kutu">
+<div class="baslik">.env nerede duracak</div>
+<p><code>contracts/</code> klasörünün içinde, <code>foundry.toml</code> dosyasının yanında. Repo kökünde durursa Foundry onu göremiyor ve <code>RPC_URL</code> bulunamıyor. <code>.env</code> asla commit edilmez, <code>.gitignore</code> içinde olduğundan emin ol.</p>
+</div>
+
+<h4>Kaynak kodu doğrulama</h4>
+
+<p>Deploy ettiğinde zincire giden şey senin yazdığın Solidity değil, derlenmiş makine kodu. Kimse okuyamaz. Doğrulama, kaynak kodunu explorer'a yükleyip "bu makine kodu bu kaynaktan çıktı" dedirtmek.</p>
+
+<p>Doğrulanmamış kontrat, okunamayan sözleşme demek. Kimse ne yaptığını bilemez.</p>
+
+<p>Bu adım en çok patlayan adımdır. Üç şey derleme anındaki ayarla birebir aynı olmalı:</p>
+<ol>
+<li>Derleyici sürümü</li>
+<li>Optimizer açık mı kapalı mı (Remix'te varsayılan kapalı)</li>
+<li>Lisans satırı</li>
+</ol>
+<p>Tutmazsa "bytecode does not match" alırsın. Ayarları kontrol et.</p>
+</section>
+
+<section>
+<div class="bolum-no">Bölüm 4</div>
+<h1>AI ile Kod Yazmak</h1>
+
+<p class="ozet">2026'da bir geliştiriciye "yapay zeka kullanma" demek anlamsız. Herkes kullanıyor, şirketler de kullanıyor. Fark yaratan şey kullanıp kullanmaman değil, çıktısını değerlendirebilmen.</p>
+
+<h2>4.1 Prompt'un dört parçası</h2>
+
+<p>İyi bir istek dört parçadan oluşuyor. Biri eksikse çıktı bozuluyor ve genelde nerede bozulduğunu anlamıyorsun.</p>
+
+<h3>Bağlam</h3>
+<p>Ne üzerinde çalışıyoruz. Hangi proje, hangi dosya, hangi araçlar, hangi sürümler.</p>
+<p>Yapay zeka senin ekranını görmüyor. Projenin Foundry mi Hardhat mı olduğunu, Solidity sürümünü, OpenZeppelin kullanıp kullanmadığını bilmiyor. Söylemezsen tahmin ediyor ve genelde en yaygın olanı seçiyor, ki o seninki olmayabilir.</p>
+
+<blockquote>
+<p><strong>Zayıf:</strong> "Bir token kontratı yaz."</p>
+<p><strong>İyi:</strong> "Foundry projesi, Solidity 0.8.28, OpenZeppelin v5 kurulu. contracts/src/ altında çalışıyorum, import yolu openzeppelin-contracts/ ile başlıyor."</p>
+</blockquote>
+
+<h3>Rol</h3>
+<p>Hangi gözle bakmasını istiyorsun. Aynı kodu yazan kişiyle denetleyen kişi farklı şeyler görür.</p>
+<p>Rol vermek modelin bilgisini artırmıyor, dikkatini yönlendiriyor. "Kıdemli güvenlik denetçisi gibi bak" dediğinde farklı şeylere odaklanıyor.</p>
+
+<blockquote>
+<p><strong>Zayıf:</strong> "Bu kodu kontrol et."</p>
+<p><strong>İyi:</strong> "Bu kontratı denetleyen bir güvenlik uzmanı gibi oku. Amacın hata bulmak, kodu övmek değil. Bulamazsan bulamadığını söyle."</p>
+</blockquote>
+
+<h3>İçerik</h3>
+<p>Üzerinde çalışacağı malzeme. Kod, hata çıktısı, şartname, test.</p>
+<p>En sık yapılan hata hata mesajını özetlemek. "Bir hata alıyorum" demek yerine hatanın tamamını yapıştır. İçindeki dosya adı ve satır numarası, senin gereksiz sandığın kısım, modelin en çok işine yarayan kısım.</p>
+
+<blockquote>
+<p><strong>Zayıf:</strong> "Test geçmiyor, düzeltir misin?"</p>
+<p><strong>İyi:</strong> "Şu test kırmızı. Test dosyasının tamamı şu. Kontratın tamamı şu. forge test çıktısı aynen şu."</p>
+</blockquote>
+
+<h3>Hedef</h3>
+<p>Ne olursa iş bitti diyeceğiz. Kabul kriteri.</p>
+<p>Hedefi söylemezsen model kendi hedefini uyduruyor. Genelde "çalışan bir şey üretmek" diye anlıyor, oysa senin hedefin "mevcut testleri bozmadan şu davranışı eklemek" olabilir.</p>
+
+<blockquote>
+<p><strong>Zayıf:</strong> "Günlük limit ekle."</p>
+<p><strong>İyi:</strong> "Günlük transfer limiti ekle. Bitti sayacağımız yer şurası: forge test yeşil olacak, mevcut dört test bozulmayacak, limit her adres için ayrı sayılacak."</p>
+</blockquote>
+
+<div class="kutu">
+<div class="baslik">Dördünü birleştir</div>
+<p class="kucuk">Foundry projesi, Solidity 0.8.28, OpenZeppelin v5. <span class="mono">contracts/src/SirinceToken.sol</span> dosyası ekte. <em>(bağlam)</em></p>
+<p class="kucuk">Test yazan bir geliştirici gibi davran, implementasyon yazma. <em>(rol)</em></p>
+<p class="kucuk">Kural şu: bir adres 24 saatte en fazla X token gönderebilir, limit her adres için ayrı sayılır, sahibi limiti değiştirebilir, limit aşılırsa işlem reddedilir. <em>(içerik)</em></p>
+<p class="kucuk">Bana sadece Foundry test dosyası ver. Her testin ne kanıtladığını bir cümleyle yaz. <em>(hedef)</em></p>
+</div>
+
+<h2>4.2 AI ile kod yazmanın beş kuralı</h2>
+
+<ol>
+<li><strong>Anlamadığın kodu deploy etme.</strong> Kampın altın kuralı. Kontrat yayınlandıktan sonra geri dönüş yok ve sorumluluk sende.</li>
+<li><strong>Önce şartname, sonra test, en son kod.</strong> Sırayı bozarsan doğrunun tanımını da yapay zekaya bırakmış olursun.</li>
+<li><strong>Çıktıyı satır satır oku.</strong> Anlamadığın satırda durup sor. Geçme.</li>
+<li><strong>Testi değil kodu düzelttiğinden emin ol.</strong> Bir test kırmızıysa modelin en kolay çözümü testi değiştirmektir. <code>git diff</code> ile kontrol et.</li>
+<li><strong>Kütüphane varsa kullan.</strong> Yapay zekaya ERC-20 yazdırma. OpenZeppelin'den miras al.</li>
+</ol>
+
+<h2>4.3 Şartname, test, kod döngüsü</h2>
+
+<p>Doğru sıra şu ve bu sıra tesadüf değil.</p>
+
+<h4>1. Şartnameyi insan yazar</h4>
+<p>Kod yazma. Kuralı düz Türkçe yaz. Dört beş madde yeter.</p>
+<p>Bu adımı yapay zekaya devretme. Çünkü şartname, ne istediğini bilmek demek ve ne istediğini bilmek senin işin.</p>
+
+<h4>2. Testleri yapay zeka yazar, insan onaylar</h4>
+<p>Prompt'ta açıkça söyle: sadece test istiyorum, implementasyon istemiyorum.</p>
+<p>Çıkan her test için kendine sor: bu test ne kanıtlıyor? Cevabı yoksa test gereksizdir. Eksik gördüğün testi kendin ekle.</p>
+
+<h4>3. Testleri çalıştır, kırmızı olsun</h4>
+<p>Henüz kod yok, doğal olarak geçmeyecek.</p>
+<p>Muhtemelen kırmızı test değil, derleme hatası göreceksin. Çünkü testler henüz var olmayan bir fonksiyonu çağırıyor ve proje derlenmiyor bile. Bu bir aksaklık değil, aynı dersin daha sert hali: testi yazdık, kod o kadar yok ki derlenmiyor.</p>
+
+<h4>4. Kodu yapay zeka yazar</h4>
+<p>Şimdi implementasyonu iste. Testlerin var olduğunu ve onları geçmesi gerektiğini söyle.</p>
+
+<h4>5. Testler karar verir</h4>
+<p>Geçmeyen varsa hata çıktısını olduğu gibi ver, düzelttir. Sonra tekrar oku.</p>
+
+<h4>6. Kritik soru</h4>
+<p>Bir test geçtiğinde kendine sor: kodu mu düzeltti, testi mi?</p>
+<pre>git diff</pre>
+<p>Testi değiştirdiyse ciddi bir sorun var. Doğrunun tanımını değiştirmiş demektir.</p>
+
+<h2>4.4 AI'ın yapamadıkları</h2>
+
+<p>Bunları bilmek, güvenebileceğin yeri bilmek demek.</p>
+
+<ul>
+<li><strong>Yeni mekanizma tasarlamak.</strong> Daha önce yazılmamış bir ekonomik kurguyu kurmak onun işi değil. Var olan kalıpları birleştiriyor.</li>
+<li><strong>Saldırıyı öngörmek.</strong> Kodun ekonomik olarak nasıl sömürüleceğini genelde göremiyor. Sözdizimi hatasını bulur, teşvik hatasını bulmaz.</li>
+<li><strong>Güncel olmak.</strong> Bu ayki protokol değişikliğini, kütüphanenin yeni sürümünü bilmeyebilir. Sürüm konusunda söylediğini doğrula.</li>
+<li><strong>Senin bağlamını bilmek.</strong> Projenin geri kalanını, kullanıcılarını, kısıtlarını bilmiyor. Sen söylersen biliyor.</li>
+<li><strong>Emin olmamak.</strong> Bilmediğinde de kendinden emin yazıyor. Bu en tehlikeli özelliği.</li>
+</ul>
+
+<h4>Araçlarla birlikte çalıştır</h4>
+
+<table>
+<tr><th></th><th>Otomatik analiz araçları</th><th>Yapay zeka</th></tr>
+<tr><td>Güçlü yanı</td><td>Kesin ve tekrarlanabilir</td><td>Geniş, bağlamı okuyor</td></tr>
+<tr><td>Zayıf yanı</td><td>Dar, sadece bildiği kalıpları görür</td><td>Emin değil, uydurabilir</td></tr>
+<tr><td>İyi olduğu iş</td><td>Bilinen zafiyet kalıpları</td><td>Araç çıktısını yorumlamak</td></tr>
+</table>
+
+<p>İkisini birlikte kullan. Slither'ı çalıştır, çıktısını yapay zekaya yorumlat, sonuca kendin karar ver.</p>
+
+<h2>4.5 Bug'ı bulmak: yeşil test yalan söyler</h2>
+
+<p>Kampın üçüncü gününde bir kontrat inceleyeceksin. Yapay zekanın "basit bir token yaz, approve ve transferFrom olsun" isteğiyle yazdığı bir kontrat.</p>
+
+<p>Derleniyor. Okunaklı. İki testi geçiyor.</p>
+
+<p>Ve bir cüzdanı boşaltabilir.</p>
+
+<p>Tuzak tam olarak burada. Testler yeşil olmak, kodun doğru olması demek değil. Yeşil test sadece şunu söyler: yazdığın testler geçiyor. Yazmadığın testler hakkında hiçbir şey söylemez.</p>
+
+<h4>Nasıl bakılır</h4>
+
+<ol>
+<li><strong>Mevcut testleri çalıştır.</strong> Yeşil. Bu yanlış bir güven duygusu üretiyor, farkına var.</li>
+<li><strong>Kodu gözle oku.</strong> Yapay zeka kullanmadan. Her fonksiyonun ne söz verdiğini yaz. Sonra o sözü tutup tutmadığına bak.</li>
+<li><strong>Otomatik araç çalıştır.</strong> Slither veya benzeri. Bulabilir de bulamayabilir de. İkisi de öğretici.</li>
+<li><strong>Bug'ı kanıtlayan testi yaz.</strong> Test kırmızı olmalı. Kırmızı test, bug'ın varlığının kanıtıdır.</li>
+<li><strong>Düzelt.</strong> Test yeşile dönsün, diğerleri hala geçsin.</li>
+</ol>
+
+<p>Sorulacak soru genelde şu şekilde: bu fonksiyon ne garanti ediyor ve bir sonraki fonksiyon o garantiyi koruyor mu?</p>
+
+<div class="kutu">
+<div class="baslik">Buradan çıkan cümle</div>
+<p>Bu kontrat derleniyordu, okunaklıydı, testleri geçiyordu ve bir cüzdanı boşaltabilirdi. Bu yüzden ERC-20'yi sıfırdan yazmıyoruz.</p>
+</div>
+</section>
+
+<section>
+<div class="bolum-no">Bölüm 5</div>
+<h1>Güvenlik</h1>
+
+<p class="ozet">Kodun kalıcı. Hatan da kalıcı. Bu bölüm kampın en akılda kalan kırk beş dakikasının yazılı hali.</p>
+
+<h2>5.1 Reentrancy: bir kasa nasıl boşaltılır</h2>
+
+<p>Yirmi satırlık bir kasa kontratı düşün. İnsanlar para yatırıyor, istediklerinde çekiyor.</p>
+
+<pre>function withdraw() external {
+    uint256 amount = balances[msg.sender];
+    require(amount &gt; 0, "no balance");
+
+    (bool ok, ) = msg.sender.call{value: amount}("");   // once gonderiyor
+    require(ok, "transfer failed");
+
+    balances[msg.sender] = 0;                           // sonra sifirliyor
+}</pre>
+
+<p>Bu kodda gözle görülmeyen bir hata var. Çoğu insan ilk bakışta bulamıyor.</p>
+
+<p>Sorun sırada. Kasa parayı gönderiyor, ama bakiyeyi sıfırlamayı sonraya bırakıyor.</p>
+
+<h4>Saldırı nasıl işliyor</h4>
+
+<p>Saldırgan sıradan bir kullanıcı değil, bir kontrat. Ve kontratların özel bir fonksiyonu var: para geldiğinde otomatik çalışan <code>receive()</code>.</p>
+
+<pre>receive() external payable {
+    if (address(kasa).balance &gt;= DEPOSIT) {
+        kasa.withdraw();          // tekrar cagiriyor
+    }
+}</pre>
+
+<p>Adım adım:</p>
+<ol>
+<li>Saldırgan <code>withdraw()</code> çağırır.</li>
+<li>Kasa önce parayı gönderir.</li>
+<li>Para gelince saldırganın <code>receive()</code> fonksiyonu tetiklenir.</li>
+<li>Oradan tekrar <code>withdraw()</code> çağrılır.</li>
+<li>Kasa hala eski bakiyeye bakıyor, çünkü sıfırlama satırına henüz gelmedi. Tekrar gönderir.</li>
+<li>İkinci adıma dön.</li>
+</ol>
+
+<p>Döngü kasa boşalana kadar sürüyor.</p>
+
+<p>Kampta canlı çalıştırdığımız test şunu gösteriyor: üç dürüst kullanıcı on beş ether yatırmış. Saldırgan bir ether ile geliyor, on altı ether ile çıkıyor.</p>
+
+<pre>ONCE   kasa      : 15 ether        saldirgan : 1 ether
+SONRA  kasa      : 0 ether         saldirgan : 16 ether</pre>
+
+<h2>5.2 Önce kontrol et, sonra kaydet, en son gönder</h2>
+
+<p>Yamanın tamamı bir satırın yerini değiştirmek.</p>
+
+<pre>function withdraw() external {
+    // 1. KONTROL
+    uint256 amount = balances[msg.sender];
+    if (amount == 0) revert NoBalance();
+
+    // 2. KAYDET (dis cagridan ONCE)
+    balances[msg.sender] = 0;
+
+    // 3. GONDER
+    (bool ok, ) = msg.sender.call{value: amount}("");
+    if (!ok) revert TransferFailed();
+}</pre>
+
+<p>Artık saldırgan tekrar girdiğinde bakiyesi sıfır görünüyor ve işlem geri alınıyor.</p>
+
+<p>Bu kalıbın adı Checks Effects Interactions. Türkçesi kampta tahtada duran cümle:</p>
+
+<div class="kutu">
+<p class="sans" style="font-size:12pt;font-weight:700;margin:0;">ÖNCE KONTROL ET, SONRA KAYDET, EN SON GÖNDER</p>
+</div>
+
+<p>Kural şu kadar basit: dışarıya bir çağrı yapmadan önce kendi hafızandaki işi bitir. Çünkü dışarı çağrı yaptığın anda kontrolü karşı tarafa veriyorsun ve o taraf sana geri dönebiliyor.</p>
+
+<h2>5.3 Üç gerçek vaka kalıbı</h2>
+
+<p>Gerçek dünyada tekrar tekrar aynı üç kalıp görülüyor.</p>
+
+<h4>Kapı açık kalmış</h4>
+<p>Belgede "bunu sadece sahibi çağırabilir" yazıyor ama koda yazılmamış. Erişim kontrolü unutulmuş. Herkes çağırmış.</p>
+<p>Önlemi: her fonksiyon için "bunu kim çağırabilir" sorusunu sor ve cevabı koda yaz.</p>
+
+<h4>Fiyata kanmış</h4>
+<p>Kontrat bir varlığın fiyatını tek bir kaynaktan okuyor. Saldırgan o kaynağı kısa süreliğine manipüle ediyor, kontrat yanlış fiyata göre işlem yapıyor.</p>
+<p>Önlemi: tek kaynağa güvenme, birden fazla kaynak veya zaman ortalaması kullan.</p>
+
+<h4>Anahtar çalınmış</h4>
+<p>Kod kusursuz. Sorun geliştiricinin bilgisayarında. Özel anahtar bir yerde açıkta kalmış, bir dosyaya yazılmış, bir ekran görüntüsünde görünmüş.</p>
+<p>Önlemi: anahtar asla kodda ve asla repoda durmaz. Ciddi para söz konusuysa donanım cüzdanı ve çoklu imza.</p>
+
+<p class="not">Bu üç kalıbın her biri için gerçek vakalar ve çalınan tutarlar var. Kampta güncel rakamlarla anlatılıyor.</p>
+
+<h4>Ortak ders</h4>
+<p>Güvenlik sadece kod değil. En zayıf halka genelde insan.</p>
+
+<h2>5.4 Yeni başlayanın kontrol listesi</h2>
+
+<p>Bir kontratı yayınlamadan önce bu beş soruyu cevapla. Fotoğrafını çek, her projede aç.</p>
+
+<ol>
+<li><strong>Bu fonksiyonu kim çağırabilir?</strong> Cevabı koda yazdım mı, yoksa sadece kafamda mı?</li>
+<li><strong>Para hangi sırayla hareket ediyor?</strong> Dışarı çağrıdan önce kendi kaydımı bitirdim mi?</li>
+<li><strong>Bir sayı beklediğimden büyük veya küçük olabilir mi?</strong> Sıfır, negatif, tavan değeri denendi mi?</li>
+<li><strong>Anahtar kimde, nerede duruyor?</strong> Repoda mı, ortam değişkeninde mi, donanımda mı?</li>
+<li><strong>Bu davranışı kanıtlayan bir testim var mı?</strong> Yoksa davranış yok sayılır.</li>
+</ol>
+
+<div class="kutu">
+<div class="baslik">Kapanış cümlesi</div>
+<p>Kodun değiştirilemez. Hatan da değiştirilemez.</p>
+</div>
+</section>
+
+<section>
+<div class="bolum-no">Bölüm 6</div>
+<h1>Arayüz: Zinciri Ekrana Bağlamak</h1>
+
+<p class="ozet">Kampın dördüncü günü. Yazdığın kontrat şu ana kadar sadece Remix'te ve explorer'da görünüyordu. Şimdi normal bir web sayfasına bağlıyoruz.</p>
+
+<h2>6.1 Okuma ve yazma farkı</h2>
+
+<p>Zincirle iki türlü konuşuluyor ve ikisi tamamen farklı.</p>
+
+<table>
+<tr><th></th><th>Okuma</th><th>Yazma</th></tr>
+<tr><td>Ücret</td><td>Bedava</td><td>Ücretli</td></tr>
+<tr><td>Süre</td><td>Anında</td><td>Beklemeli</td></tr>
+<tr><td>Cüzdan</td><td>Gerekmez</td><td>Onay ister</td></tr>
+<tr><td>Sonuç</td><td>Hemen döner</td><td>Blok bekler</td></tr>
+</table>
+
+<p>Okuma bedava çünkü zinciri değiştirmiyor. Herhangi bir düğüme soruyorsun, cevabı veriyor.</p>
+
+<p>Yazma bir işlem gönderiyor. İmza gerekiyor, ücret gerekiyor, blok beklemesi gerekiyor.</p>
+
+<p>Bu fark arayüz tasarımının tamamını belirliyor. Okuma yapan bir bileşen sade olabilir. Yazma yapan bir bileşen üç durumu da göstermek zorunda: bekliyor, başarılı, hata.</p>
+
+<h2>6.2 wagmi ve viem</h2>
+
+<p>İki kütüphane, birlikte çalışıyorlar.</p>
+
+<ul>
+<li><strong>viem</strong> alt katman. Zincirle konuşan, veriyi kodlayıp çözen kısım.</li>
+<li><strong>wagmi</strong> üst katman. React için hazır kancalar sunuyor.</li>
+</ul>
+
+<h4>Yapılandırma</h4>
+<p>Hangi ağa bağlandığını ve nasıl bağlanacağını burada söylüyorsun:</p>
+<pre>import { http, createConfig, injected } from "wagmi";
+import { baseSepolia } from "wagmi/chains";
+
+export const config = createConfig({
+  chains: [baseSepolia],
+  connectors: [injected()],
+  transports: { [baseSepolia.id]: http() },
+});</pre>
+
+<p><code>injected()</code>, tarayıcıda kurulu cüzdanı kullan demek. MetaMask gibi.</p>
+
+<h4>ABI nedir</h4>
+<p>Kontratın arayüz tanımı. Hangi fonksiyonlar var, hangi parametreleri alıyor, ne döndürüyor. Arayüzün kontratla konuşabilmesi için buna ihtiyacı var.</p>
+<p>Tamamını koymana gerek yok, sadece kullandığın fonksiyonları koy.</p>
+
+<h4>Okuma</h4>
+<pre>const { data: lastMessage } = useReadContract({
+  address: DEFTER_ADDRESS,
+  abi: DEFTER_ABI,
+  functionName: "lastMessage",
+});</pre>
+
+<h4>Yazma</h4>
+<pre>const { data: hash, writeContract, isPending, error } = useWriteContract();
+
+writeContract({
+  address: DEFTER_ADDRESS,
+  abi: DEFTER_ABI,
+  functionName: "write",
+  args: [draft],
+});</pre>
+
+<h2>6.3 Bekleme ve hata durumu</h2>
+
+<p>Burası çoğu projenin eksik bıraktığı yer ve kullanıcı deneyimini belirleyen yer.</p>
+
+<h4>İmzalandı, onaylandı demek değil</h4>
+<p>Kullanıcı cüzdanda onay verdiğinde işlem gönderiliyor ama henüz zincire yazılmadı. İki ayrı durum var:</p>
+<pre>isPending    // cuzdan onayi bekleniyor
+isConfirming // islem gonderildi, blok bekleniyor</pre>
+
+<p>Butonun her ikisinde de farklı yazması gerekiyor. Aksi halde kullanıcı bir şey olmadığını sanıp tekrar basıyor ve iki işlem gönderiyor.</p>
+
+<pre>{isPending ? "Cuzdan onayi bekleniyor..."
+ : isConfirming ? "Zincire yaziliyor..."
+ : "Gonder"}</pre>
+
+<h4>Üç hata yolunu da düşün</h4>
+<ol>
+<li>Kullanıcı cüzdanda reddedebilir.</li>
+<li>Cüzdanında yeterli para olmayabilir.</li>
+<li>Ağ düşebilir veya işlem geri alınabilir.</li>
+</ol>
+<p>Üçünde de sayfa donmamalı, hata ekrana basılmalı. Kullanıcı ne olduğunu bilmeli.</p>
+
+<h4>İşlem geçtikten sonra veriyi tazele</h4>
+<p>İşlem onaylandığında ekrandaki veri hala eski. Yenilemen gerekiyor:</p>
+<pre>const { isSuccess } = useWaitForTransactionReceipt({ hash });
+
+useEffect(() => {
+  if (isSuccess) refetch();
+}, [isSuccess]);</pre>
+
+<div class="kutu">
+<div class="baslik">Sık yapılan hata</div>
+<p>Sayfa boş geliyor ve hata da vermiyor. Neredeyse her zaman iki sebepten biri. Önce kontrat adresini kontrol et, sonra cüzdanın hangi ağda olduğunu. Yanlış ağdaysan okuma sessizce boş döner.</p>
+</div>
+</section>
+
+<section>
+<div class="bolum-no">Bölüm 7</div>
+<h1>Hackathon</h1>
+
+<p class="ozet">Kampın son günü bir Demo Day ile bitiyor. Ama bu bölüm sadece kamp için değil. Bundan sonra gideceğin her hackathon için geçerli.</p>
+
+<h2>7.1 Üç dakikada sunum</h2>
+
+<p>Demo Day formatı: takım başına üç dakika. Bu süre sandığından kısa. Prova etmezsen ilk dakikada tükenirsin.</p>
+
+<table>
+<tr><th>Süre</th><th>Ne anlatılır</th></tr>
+<tr><td>İlk 30 saniye</td><td>Ne yaptınız. Tek cümlede problem, tek cümlede çözüm.</td></tr>
+<tr><td>Sonraki 90 saniye</td><td>Canlı göster. Konuşma, tıkla.</td></tr>
+<tr><td>Son 60 saniye</td><td>En zor kısım neydi, nasıl çözdünüz.</td></tr>
+</table>
+
+<h4>İlk otuz saniye her şeyi belirliyor</h4>
+<p>Jüri ilk yarım dakikada ne yaptığını anlamazsa geri kalanını dinlemez. Sunuma "biz düşündük ki" diye başlama. Şöyle başla:</p>
+
+<blockquote>
+<p>"Bir grup arkadaş ortak bir kasaya para koyuyor ama kimse diğerine tam güvenmiyor. Biz bunu çözen bir kontrat yazdık. Üç kişiden ikisi onaylamadan para çıkmıyor."</p>
+</blockquote>
+
+<p>İki cümle. Problem ve çözüm. Teknoloji adı bile geçmedi, gerek de yok.</p>
+
+<h4>Canlı göster, slayt gösterme</h4>
+<p>Doksan saniyelik demo bölümünde ekranda uygulaman olsun. Mimari şeması, teknoloji logoları, yol haritası slaytı gösterme. Jüri çalışan bir şey görmek istiyor.</p>
+
+<h4>Demo çökerse</h4>
+<p>Önceden ekran kaydı al. Canlı demo çökerse videoyu aç, sunuma devam et. Panikleyip ortamı düzeltmeye çalışma, süre işliyor.</p>
+
+<h2>7.2 Jüri neye bakar</h2>
+
+<p>Jüri üyeleri farklı şeylere değer verir ama neredeyse hepsi şu dört soruyu sorar:</p>
+
+<ol>
+<li><strong>Çalışıyor mu?</strong> Gerçekten çalışan bir şey mi, yoksa mockup mu. Bu en ağır kriter.</li>
+<li><strong>Neden blokzincir?</strong> Aynı işi bir veritabanı yapıyorsa proje zayıflar. Cevabın hazır olsun.</li>
+<li><strong>Kim yaptı?</strong> Takımın kodu anlıyor mu. Soru sorulduğunda cevap verebiliyor musunuz.</li>
+<li><strong>Sonrası var mı?</strong> Hackathon bitince devam edecek mi, yoksa bir hafta sonu projesi mi.</li>
+</ol>
+
+<p>Dördüncü soruya "devam edeceğiz" demek yetmez. Neyi devam ettireceğini somut söyle.</p>
+
+<h2>7.3 En sık yapılan sekiz hata</h2>
+
+<ol>
+<li><strong>Kapsamı kesmemek.</strong> Bitmeyen proje sunulamaz. Kural: tek kontrat, tek ekran, tek buton. Fazlası yok.</li>
+<li><strong>Son saatte özellik eklemek.</strong> Son iki saatte kod yazma. Prova et, ekran kaydı al, sunumu hazırla.</li>
+<li><strong>Anlamadığı kodu kopyalamak.</strong> Jüri "bu satır ne yapıyor" diye sorduğunda cevap veremezsin ve proje orada biter.</li>
+<li><strong>Hiç test yazmamak.</strong> Bir tane bile olsa yaz. "Testimiz var" demek ile dememek arasında ciddi fark var.</li>
+<li><strong>Ana ağa deploy etmek.</strong> Testnet yeterli. Ana ağa çıkmak ne etkileyici ne akıllıca.</li>
+<li><strong>Özel anahtarı repoya koymak.</strong> Her hackathonda birileri yapıyor. <code>.gitignore</code> dosyanı kontrol et.</li>
+<li><strong>Sunumda teknoloji saymak.</strong> Kullandığın kütüphaneleri listelemek kimseyi etkilemiyor. Ne yaptığını göster.</li>
+<li><strong>Tek kişinin kodlaması.</strong> Bir kişi kod yazıp diğerleri beklerse takım öğrenmiyor ve sunum çöküyor. İşi böl.</li>
+</ol>
+
+<h2>7.4 Kampın ardından nasıl çalışılır</h2>
+
+<p>Bu dört gün bir başlangıç. Devamı gelmezse unutulur. Devamının nasıl geleceği şu:</p>
+
+<h4>Küçük ve bitmiş şeyler yap</h4>
+<p>Büyük bir proje başlatıp yarıda bırakmak, küçük bir projeyi bitirmekten daha az öğretiyor. Bitmiş bir şeyin bir sonu, bir demosu ve bir dersi oluyor.</p>
+<p>İki haftada bitecek şeyler seç. Bitir. Sonra bir sonrakine geç.</p>
+
+<h4>Halka açık çalış</h4>
+<p>Yazdığın her şeyi GitHub'a koy. Kimse bakmasa bile koy. Bir yıl sonra geriye dönüp baktığında ilerlemeni göreceksin ve bir işe başvururken göstereceğin şey bu olacak.</p>
+
+<h4>Başkasının kodunu oku</h4>
+<p>Yazmaktan çok okumak öğretiyor. OpenZeppelin kontratlarını aç ve oku. Anlamadığın yeri not al, sonra araştır.</p>
+
+<h4>Hata mesajını okumayı öğren</h4>
+<p>Cevabın yarısı zaten hata mesajında yazıyor. Okumadan yapıştırma alışkanlığı, geliştirici olmanın önündeki en büyük engeldir.</p>
+
+<h4>Hackathona git</h4>
+<p>Bir hafta sonunda ekip kurar, bir şey yapar, sunarsın. Kazanmasan bile portföyün, ekip arkadaşların ve tanışıklığın kalır. Çoğu insan ilk işini oradan buluyor.</p>
+
+<h4>Takıldığında ne yapılır</h4>
+<ol>
+<li>Hata mesajını sonuna kadar oku.</li>
+<li>Yapay zekaya bağlam ver. Kodu, hatayı ve ne beklediğini birlikte ver.</li>
+<li>Sor. Topluluklar sandığından çok daha yardımsever.</li>
+</ol>
+</section>
+
+<section>
+<div class="bolum-no">Bölüm 8</div>
+<h1>Yazılımcı ve Geliştirici</h1>
+
+<p class="ozet">Bu bölüm teknik değil. Ama kampın en uzun vadeli faydası burada.</p>
+
+<h2>8.1 İki farklı kavram</h2>
+
+<p>Günlük dilde ikisi aynı anlamda kullanılıyor. Değiller.</p>
+
+<p><strong>Yazılımcı</strong>, verilen bir işi koda çeviren kişidir. Şartname geliyor, o şartnameyi çalışan bir programa dönüştürüyor. Ölçüsü şudur: istenen şeyi ne kadar doğru ve ne kadar hızlı yazdı.</p>
+
+<p><strong>Geliştirici</strong>, neyin yazılması gerektiğine karar veren kişidir. Problemi tanımlıyor, çözümü tasarlıyor, neyin yapılmayacağına karar veriyor. Kod bu işin sadece bir parçası.</p>
+
+<p>Aradaki fark bir yetenek hiyerarşisi değil. Farklı işler.</p>
+
+<p>Ama son üç yılda bu iki işten birinin değeri hızla düştü, diğerininki yükseldi.</p>
+
+<h2>8.2 AI yazmayı ucuzlattığında geriye ne kalıyor</h2>
+
+<p>Şunu net söyleyelim. Bir şartnameyi koda çevirme işi artık ucuz. Çok ucuz. Beş yıl önce bir günlük iş olan şey bugün on dakika sürüyor.</p>
+
+<p>Bu, yazma becerisinin değersiz olduğu anlamına gelmiyor. Ama tek başına yazma becerisinin kıt olmadığı anlamına geliyor. Kıt olmayan şey pahalı olmuyor.</p>
+
+<h4>Peki ne kıt kaldı</h4>
+
+<p><strong>Doğru problemi seçmek.</strong> Yapay zeka sana ne yapman gerektiğini söylemiyor. Sorduğun soruya cevap veriyor. Yanlış soruyu mükemmel cevaplayan bir sistem hala yanlış.</p>
+
+<p><strong>Neyin yapılmayacağına karar vermek.</strong> Bir projeyi bitiren şey eklenen özellikler değil, eklenmeyenlerdir. Yapay zeka sana "bunu yapma" demiyor, istediğin her özelliği yazıyor.</p>
+
+<p><strong>Çıktıyı değerlendirmek.</strong> Kod üretmek ucuzladıkça, üretilen kodun doğru olup olmadığına karar verebilmek pahalılaşıyor. Kampın üçüncü günü tam olarak bunun üstüne kurulu. Derlenen, okunaklı, testleri geçen ve yine de bir cüzdanı boşaltabilen bir kontrat gördün.</p>
+
+<p><strong>Sorumluluk almak.</strong> Bir kontrat yayınlandığında ve para kaybedildiğinde kimse yapay zekayı sorumlu tutmuyor. İmzayı sen atıyorsun.</p>
+
+<p><strong>Bağlamı taşımak.</strong> Kullanıcının kim olduğunu, hangi kısıtların gerçek olduğunu, geçen ay neyin denenip başarısız olduğunu bilen sensin. Bu bilgi hiçbir prompt'a sığmıyor.</p>
+
+<h4>Yani</h4>
+
+<p>Yazma işi ucuzladı. Karar verme işi ucuzlamadı. Yapay zekanın yaptığı şey, işin ağırlığını yazmaktan karar vermeye kaydırmak oldu.</p>
+
+<p>Bu iyi bir haber. Çünkü kod yazmayı öğrenmek yıllar alıyordu ve o kapı çoğu insana kapalıydı. Şimdi kapı açık. Ama içeride farklı bir beceri isteniyor.</p>
+
+<h2>8.3 Builder olmak</h2>
+
+<p>Builder, bir şeyi baştan sona kurup çalışır hale getiren kişidir. Fikirden başlar, kısıtları anlar, ne yapılacağına karar verir, yapar, insanların önüne koyar, geri bildirime göre değiştirir.</p>
+
+<p>Bu tanımın içinde kod yazmak var ama tamamı o değil.</p>
+
+<h4>Builder'ın ayakta kalmasının sebebi</h4>
+
+<p>Yapay zeka bir aracı otomatikleştiriyor, bir amacı değil. Sana çekiç veriyor, ne inşa edeceğini söylemiyor.</p>
+
+<p>Ve inşa etmek, kod yazmaktan ibaret olmadığı için, kod yazmanın ucuzlaması builder'ı zayıflatmıyor. Güçlendiriyor. Tek başına bir kişi, beş yıl önce beş kişinin yapabileceği işi yapabiliyor.</p>
+
+<h4>Blokzincirin bu tabloda yeri</h4>
+
+<p>Bu alan builder'lara nadir bir şey sunuyor. İzin gerekmiyor.</p>
+
+<p>Bir kontrat yayınlamak için kimseden onay almıyorsun. Şirket kurman, anlaşma imzalaman, bir platformun seni kabul etmesi gerekmiyor. Kodu yazıyorsun, ağa gönderiyorsun, çalışıyor.</p>
+
+<p>Bu kampta dört günde yaptığın şey tam olarak buydu. Bir cüzdan kurdun, bir kontrat yazdın, kendi paranı çıkardın, arayüz bağladın ve hepsini kimseden izin almadan yaptın.</p>
+
+<h4>Nereden devam edersin</h4>
+
+<p>Bugün itibarıyla elinde şunlar var: çalışan bir geliştirme ortamı, zincire yayınlanmış kendi kontratın, testleri okuyabilme becerisi, bir hack'in nasıl işlediğini görmüş olmak ve yapay zekayı denetleyebilecek kadar temel.</p>
+
+<p>Eksik olan tek şey tekrar. Bir sonraki projeyi başlat.</p>
+
+<div class="kutu">
+<div class="baslik">Kapanış</div>
+<p>Anlamadığın kodu deploy etme. Ama anlamak için denemeyi bırakma.</p>
+</div>
+</section>
+
+<section>
+<div class="bolum-no">Ekler</div>
+<h1>Ek A: Komut Referansı</h1>
+
+<h2>Foundry</h2>
+<pre>forge build                    # kontratlari derle
+forge build --offline          # internete cikmadan derle
+forge test                     # butun testleri calistir
+forge test -vv                 # console.log ciktilarini goster
+forge test --match-test isim   # tek bir testi calistir
+forge test --match-contract X  # tek bir test kontratini calistir
+forge fmt                      # kodu bicimlendir
+forge install kullanici/repo@surum
+forge script script/Deploy.s.sol --rpc-url base_sepolia --broadcast</pre>
+
+<h2>cast</h2>
+<pre>cast chain-id --rpc-url base_sepolia
+cast block-number --rpc-url base_sepolia
+cast balance ADRES --rpc-url base_sepolia --ether
+cast code ADRES --rpc-url base_sepolia
+cast tx TX_HASH --rpc-url base_sepolia
+cast call ADRES "lastMessage()(string)" --rpc-url base_sepolia
+cast send ADRES "write(string)" "merhaba" --rpc-url base_sepolia --private-key $PRIVATE_KEY
+cast send ADRES --value 0.01ether --rpc-url base_sepolia --private-key $PRIVATE_KEY
+cast wallet address --private-key $PRIVATE_KEY</pre>
+
+<h2>anvil (yerel zincir)</h2>
+<pre>anvil                          # 127.0.0.1:8545, zincir kimligi 31337
+anvil --host 0.0.0.0           # ag uzerinden erisilebilir yap
+
+forge create src/SirinceDefteri.sol:SirinceDefteri \
+  --rpc-url http://127.0.0.1:8545 \
+  --unlocked --from 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 \
+  --broadcast</pre>
+
+<h2>Git</h2>
+<pre>git clone --recurse-submodules ADRES
+git status
+git diff
+git diff DOSYA
+git add .
+git commit -m "mesaj"
+git push
+git pull
+git log --oneline
+git checkout -- DOSYA          # bir dosyadaki degisikligi geri al</pre>
+
+<h2>Node ve arayüz</h2>
+<pre>nvm install --lts
+nvm use --lts
+npm install
+npm run dev                    # gelistirme sunucusu
+npm run build                  # uretim derlemesi
+npm audit                      # bilinen guvenlik aciklarini listele</pre>
+
+<h1>Ek B: Sözlük</h1>
+
+<table>
+<tr><th>Terim</th><th>Anlamı</th></tr>
+<tr><td>ABI</td><td>Kontratın arayüz tanımı. Hangi fonksiyonlar var, hangi parametreleri alıyor.</td></tr>
+<tr><td>Adres</td><td>Zincirdeki hesap kimliği. 0x ile başlayan 42 karakter.</td></tr>
+<tr><td>Blok</td><td>Bir arada işlenen işlem paketi. Zincirin bir halkası.</td></tr>
+<tr><td>Çift harcama</td><td>Aynı parayı iki kere göndermeye çalışmak.</td></tr>
+<tr><td>Deploy</td><td>Kontratı zincire yayınlama işlemi.</td></tr>
+<tr><td>ERC-20</td><td>Token standardı. Cüzdanların token'ı tanıması bu sayede.</td></tr>
+<tr><td>Event</td><td>Kontratın ağa bıraktığı iz. Arayüzler bunu okur.</td></tr>
+<tr><td>EVM</td><td>Ethereum Virtual Machine. Kontratların çalıştığı ortam. Base dahil birçok ağ EVM uyumlu.</td></tr>
+<tr><td>Gaz</td><td>İşlemin hesaplama maliyeti birimi. Ücret buradan hesaplanır.</td></tr>
+<tr><td>Hash</td><td>Bir veriden üretilen sabit uzunluktaki özet. Kampta mühür dediğimiz şey.</td></tr>
+<tr><td>immutable</td><td>Bir kere yazılıp bir daha değişmeyen değişken.</td></tr>
+<tr><td>L2</td><td>Ana ağın üstünde çalışan, işlemleri toplu gönderen katman. Base bir L2.</td></tr>
+<tr><td>Mempool</td><td>İşlemlerin bloğa girmeyi beklediği havuz.</td></tr>
+<tr><td>Mint</td><td>Yeni token üretmek.</td></tr>
+<tr><td>modifier</td><td>Fonksiyonlara takılan tekrar eden kontrol.</td></tr>
+<tr><td>msg.sender</td><td>Fonksiyonu şu an çağıran adresin kendisi.</td></tr>
+<tr><td>Musluk (faucet)</td><td>Test parası dağıtan site.</td></tr>
+<tr><td>Nonce</td><td>Bir adresin kaçıncı işlemi olduğunu gösteren sayaç.</td></tr>
+<tr><td>Reentrancy</td><td>Bir fonksiyonun bitmeden tekrar çağrılmasıyla yapılan saldırı.</td></tr>
+<tr><td>revert</td><td>İşlemi tamamen geri alma. Yarım değişiklik kalmaz.</td></tr>
+<tr><td>RPC</td><td>Bir düğümle konuşmak için kullanılan adres ve protokol.</td></tr>
+<tr><td>Testnet</td><td>Gerçek para kullanılmayan deneme ağı. Bizimki Base Sepolia.</td></tr>
+<tr><td>Wei</td><td>ETH'nin en küçük birimi. 1 ETH = 10 üzeri 18 wei.</td></tr>
+</table>
+
+<h1>Ek C: Kaynaklar</h1>
+
+<h2>Belgelendirme</h2>
+<ul>
+<li>Solidity resmi belgeleri: docs.soliditylang.org</li>
+<li>Foundry Book: book.getfoundry.sh</li>
+<li>OpenZeppelin Contracts: docs.openzeppelin.com/contracts</li>
+<li>Base geliştirici belgeleri: docs.base.org</li>
+<li>wagmi: wagmi.sh</li>
+<li>viem: viem.sh</li>
+</ul>
+
+<h2>Araçlar</h2>
+<ul>
+<li>Remix: remix.ethereum.org</li>
+<li>Base Sepolia explorer: sepolia.basescan.org</li>
+<li>Base musluk listesi: docs.base.org/chain/network-faucets</li>
+<li>Coinbase Developer Platform musluğu: portal.cdp.coinbase.com</li>
+</ul>
+
+<h2>Pratik yapmak için</h2>
+<ul>
+<li>Oyunlaştırılmış zafiyet bulmacaları. Kontratı hackleyerek öğreniyorsun.</li>
+<li>Açık kaynak projelere küçük katkılar. İlk işi genelde bu getiriyor.</li>
+<li>Hackathonlar.</li>
+</ul>
+
+<hr>
+
+<p class="kucuk">RlayHub Blokzincir Geliştiriciliği Kampı, Nesin Matematik Köyü, Şirince, Ağustos 2026.<br>
+Kampın kodu, ders dosyaları ve slaytları: github.com/mericcintosun/rlay-blockchain</p>
+</section>
+
+</body>
+</html>
