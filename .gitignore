@@ -10,3 +10,6 @@ contracts/egzersiz/cache/
 web/.next/
 web/node_modules/
 .DS_Store
+
+# Nested clone of this repo, do not track
+rlay-blockchain/
